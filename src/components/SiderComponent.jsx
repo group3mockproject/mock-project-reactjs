@@ -21,6 +21,13 @@ const SiderComponent = () => {
       icon: <AddToPhotosIcon />,
       path: "/inventory",
     },
+
+    {
+      key: "register-utilities",
+      label: "Register Utilities",
+      icon: <></>,
+      path: "/customer/register-utilities",
+    },
   ];
 
   return (
