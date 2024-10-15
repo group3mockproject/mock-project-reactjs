@@ -9,6 +9,12 @@ import HomeScreen from "../screens/HomeScreen";
 import SiderComponent from "@/components/SiderComponent";
 import HeaderComponent from "@/components/HeaderComponent";
 
+import ViewContracts from "@/screens/customer/view_contracts/ViewContracts";
+import ContractDetail from "@/screens/customer/view_contracts/ContractDetail";
+import MyComplaints from "@/screens/customer/my_complaints/MyComplaints";
+import CreateComplaint from "@/screens/customer/my_complaints/CreateComplaint";
+import ComplaintDetail from "@/screens/customer/my_complaints/ComplaintDetail";
+
 const drawerWidth = 240;
 
 export default function MainRoute() {
@@ -50,6 +56,20 @@ export default function MainRoute() {
           <Toolbar />
           <Routes>
             <Route path="/" element={<HomeScreen />}></Route>
+            <Route path="/customer/contracts" element={<ViewContracts />} />
+            <Route
+              path="/customer/contracts/:id"
+              element={<ContractDetail />}
+            />
+            <Route path="/customer/complaints" element={<MyComplaints />} />
+            <Route
+              path="/customer/complaints/new"
+              element={<CreateComplaint />}
+            />
+            <Route
+              path="/customer/complaints/:id"
+              element={<ComplaintDetail />}
+            />
             {/* Example path Router here */}
           </Routes>
         </Box>

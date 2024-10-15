@@ -1,0 +1,51 @@
+.view-contracts {
+    &__heading {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+  
+    &__desc {
+      font-style: italic;
+      margin-bottom: 2rem;
+    }
+  
+    &__list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+  
+    &__card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 1rem;
+      border-radius: 8px;
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+  
+      &-header {
+        h3 {
+          margin: 0;
+          font-size: 1.5rem;
+        }
+        p {
+          margin: 0.2rem 0;
+        }
+      }
+  
+      &-footer {
+        margin-top: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+  
+    &__button {
+      background-color: #4caf50;
+      color: #fff;
+    }
+  }
+  
