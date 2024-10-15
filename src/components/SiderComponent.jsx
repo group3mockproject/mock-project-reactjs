@@ -6,6 +6,8 @@ import ListItemText from "@mui/material/ListItemText";
 import HomeIcon from "@mui/icons-material/Home";
 import AddToPhotosIcon from "@mui/icons-material/AddToPhotos";
 import { Link } from "react-router-dom";
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
+import LocalHotelIcon from '@mui/icons-material/LocalHotel';
 
 const SiderComponent = () => {
   const routes = [
@@ -14,6 +16,18 @@ const SiderComponent = () => {
       label: "Home",
       icon: <HomeIcon />,
       path: "/",
+    },
+    {
+      key: "financial",
+      label: "Financial",
+      icon: <CurrencyExchangeIcon />,
+      path: "/financial",
+    },
+    {
+      key: "residents",
+      label: "Residents",
+      icon: <LocalHotelIcon />,
+      path: "/residents",
     },
     {
       key: "inventory",

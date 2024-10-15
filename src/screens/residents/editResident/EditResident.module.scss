@@ -1,0 +1,112 @@
+.editResident {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  .formHeader {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+  }
+
+  #editTenantForm {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+
+    .formElement {
+      width: 40%;
+      margin: 5px;
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"],
+      input[type="number"],
+      input[type="date"],
+      select, textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      .paymentType {
+        display: flex;
+        gap: 15px;
+
+        label {
+          font-weight: 300;
+        }
+      }
+
+      input[type="radio"] {
+        border-radius: 50%;
+        width: 14px;
+        height: 14px;
+        margin-right: 10px;
+      }
+    }
+    .btnSubmit {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      button {
+        width: 12%;
+        padding: 10px;
+        background-color: #55ace5;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+
+        &:hover {
+          background-color: #45A9EA;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .formElement {
+    width: 70%;
+    margin: 5px;
+  }
+
+  input, button {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  .editResident {
+    padding: 15px;
+  }
+
+  .formElement {
+    width: 100%;
+    margin: 5px;
+  }
+
+  .btnSubmit {
+    margin-top: 40px;
+    width: 100%;
+  }
+
+  button {
+    width: 100%;
+  }
+}

@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomeScreen from "../screens/HomeScreen";
 import SiderComponent from "@/components/SiderComponent";
 import HeaderComponent from "@/components/HeaderComponent";
+import {EditResident} from "@/screens/residents/editResident/EditResident.jsx";
 
 const drawerWidth = 240;
 
@@ -50,6 +51,7 @@ export default function MainRoute() {
           <Toolbar />
           <Routes>
             <Route path="/" element={<HomeScreen />}></Route>
+            <Route path="/residents/:id" element={<EditResident />}></Route>
             {/* Example path Router here */}
           </Routes>
         </Box>
