@@ -5,9 +5,10 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import HomeScreen from "../screens/HomeScreen";
+import HomeScreen from "../screens/home/HomeScreen.jsx";
 import SiderComponent from "@/components/SiderComponent";
 import HeaderComponent from "@/components/HeaderComponent";
+import MangerApartment from "@/screens/manger_apartment/MangerApartment.jsx";
 
 const drawerWidth = 240;
 
@@ -50,6 +51,7 @@ export default function MainRoute() {
           <Toolbar />
           <Routes>
             <Route path="/" element={<HomeScreen />}></Route>
+              <Route path="/MangerApartment" element={<MangerApartment />}></Route>
             {/* Example path Router here */}
           </Routes>
         </Box>
