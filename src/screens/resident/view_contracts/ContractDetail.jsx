@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import "./ContractDetail.scss";
 
+// Dữ liệu mẫu cho hợp đồng
 const contractData = [
   {
     lease_id: 1,
@@ -30,18 +31,28 @@ const ContractDetail = () => {
   const contract = contractData.find((item) => item.lease_id === parseInt(id));
 
   if (!contract) {
-    return <div>Contract not found</div>;
+    return <div className="contract-detail__not-found">Contract not found</div>;
   }
 
   return (
     <div className="contract-detail">
-      <h1>Contract Detail #{contract.lease_id}</h1>
-      <p>Apartment ID: {contract.apartment_id}</p>
-      <p>Rent Amount: {contract.rent_amount}$</p>
-      <p>Deposit Amount: {contract.deposit_amount}$</p>
-      <p>Status: {contract.status}</p>
+      <h1 className="contract-detail__heading">
+        Contract Detail #{contract.lease_id}
+      </h1>
       <p>
-        Period: {contract.start_date} to {contract.end_date}
+        <b>Apartment ID:</b> {contract.apartment_id}
+      </p>
+      <p>
+        <b>Rent Amount:</b> ${contract.rent_amount}
+      </p>
+      <p>
+        <b>Deposit Amount:</b> ${contract.deposit_amount}
+      </p>
+      <p>
+        <b>Status:</b> {contract.status}
+      </p>
+      <p>
+        <b>Period:</b> {contract.start_date} to {contract.end_date}
       </p>
     </div>
   );
