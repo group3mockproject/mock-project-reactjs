@@ -1,0 +1,29 @@
+.lease-contract {
+
+    width: 100%;
+
+    %flex-center {
+        display: flex;
+        align-items: center;
+        gap: 1em;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    &__actions {
+        @extend %flex-center;
+        justify-content: space-between;
+    }
+
+    &__search-area {
+        @extend %flex-center;
+    }
+
+    &__table {
+        width: 100%;
+    }
+}

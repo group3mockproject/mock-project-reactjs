@@ -4,11 +4,13 @@ import CssBaseline from "@mui/material/CssBaseline";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import HomeScreen from "../screens/HomeScreen";
 import SiderComponent from "@/components/SiderComponent";
 import HeaderComponent from "@/components/HeaderComponent";
 import RegisterUtilities from "@/screens/customer/register_utilities/RegisterUtilities";
+import Timekeeping from "@/screens/admin/timekeeping/Timekeeping";
+import LeaseContract from "@/screens/apartment_manager/LeaseContract/LeaseContract";
 
 const drawerWidth = 240;
 
@@ -51,8 +53,15 @@ export default function MainRoute() {
           <Toolbar />
           <Routes>
             <Route path="/" element={<HomeScreen />}></Route>
-            <Route path="/customer/register-utilities" element={<RegisterUtilities />}></Route>
-            {/* Example path Router here */}
+            <Route path="/customer" element={<Outlet />}>
+              <Route path="register-utilities" element={<RegisterUtilities />} />
+            </Route>
+            <Route path="/admin" element={<Outlet />}>
+              <Route path="timekeeping" element={<Timekeeping />} />
+            </Route>
+            <Route path="/apartment-manager" element={<Outlet />}>
+              <Route path="lease-contract" element={<LeaseContract />} />
+            </Route>
           </Routes>
         </Box>
       </Box>
