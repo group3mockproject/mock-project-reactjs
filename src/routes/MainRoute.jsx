@@ -1,3 +1,4 @@
+import * as React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -9,9 +10,20 @@ import HomeScreen from "../screens/HomeScreen";
 import SiderComponent from "@/components/SiderComponent";
 import HeaderComponent from "@/components/HeaderComponent";
 
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
+
 const drawerWidth = 240;
 
 export default function MainRoute() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // Kiểm tra nếu là màn hình nhỏ
+  const [open, setOpen] = React.useState(false);
+
+  const handleDrawerToggle = () => {
+    setOpen(!open);
+  };
+
   return (
     <BrowserRouter>
       <Box sx={{ display: "flex" }}>
@@ -19,12 +31,14 @@ export default function MainRoute() {
         <AppBar
           position="fixed"
           sx={{
-            width: `calc(100% - ${drawerWidth}px)`,
-            ml: `${drawerWidth}px`,
+            width: isMobile ? "100%" : `calc(100% - ${drawerWidth}px)`, // Chỉnh lại width
+            marginLeft: isMobile ? 0 : `${drawerWidth}px`, // marginLeft thay ml để rõ ràng
           }}
         >
-          <HeaderComponent />
+          <HeaderComponent onMenuClick={handleDrawerToggle} />{" "}
+          {/* Truyền sự kiện mở Menu */}
         </AppBar>
+
         <Drawer
           sx={{
             width: drawerWidth,
@@ -34,15 +48,17 @@ export default function MainRoute() {
               boxSizing: "border-box",
             },
           }}
-          variant="permanent"
+          variant={isMobile ? "temporary" : "permanent"} // Chuyển từ permanent sang temporary nếu là mobile
           anchor="left"
+          open={isMobile ? open : true}
+          onClose={handleDrawerToggle} // Đóng drawer khi trên mobile
         >
           <Toolbar>
             <Typography>Logo</Typography>
           </Toolbar>
-          {/* Past Sider-------------------- */}
           <SiderComponent />
         </Drawer>
+
         <Box
           component="main"
           sx={{ flexGrow: 1, bgcolor: "background.default", p: 3 }}
