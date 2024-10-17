@@ -30,6 +30,12 @@ const SiderComponent = () => {
       path: "/residents",
     },
     {
+      key: "payments",
+      label: "Payment List & Payfee",
+      icon: '',
+      path: "/residents/payments",
+    },
+    {
       key: "inventory",
       label: "Inventory",
       icon: <AddToPhotosIcon />,
