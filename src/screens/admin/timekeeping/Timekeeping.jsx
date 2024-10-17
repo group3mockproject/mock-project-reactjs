@@ -56,7 +56,6 @@ const Timekeeping = () => {
                 columns={columns}
                 initialState={{ pagination: { paginationModel } }}
                 pageSizeOptions={[5, 10]}
-                checkboxSelection
                 sx={{ border: 0 }}
             />
         </div>

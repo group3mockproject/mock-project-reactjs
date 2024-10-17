@@ -1,0 +1,17 @@
+.customer-update {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1em;
+}
+
+@media screen and (width > 45em) {
+    .customer-update {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    button {
+        grid-column: 2/span 1;
+        width: max-content;
+        justify-self: end;
+    }
+}

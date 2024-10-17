@@ -15,6 +15,8 @@ import LeaseContract from "@/screens/apartment_manager/LeaseContract/LeaseContra
 
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
+import CustomerList from "@/screens/apartment_manager/customers/list/CustomerList";
+import CustomerUpdate from "@/screens/apartment_manager/customers/update/CustomerUpdate";
 
 const drawerWidth = 240;
 
@@ -64,7 +66,7 @@ export default function MainRoute() {
 
         <Box
           component="main"
-          sx={{ flexGrow: 1, bgcolor: "background.default", p: 3, overflow: "auto"}}
+          sx={{ flexGrow: 1, bgcolor: "background.default", p: 3, overflow: "auto" }}
         >
           <Toolbar />
           <Routes>
@@ -77,6 +79,8 @@ export default function MainRoute() {
             </Route>
             <Route path="/apartment-manager" element={<Outlet />}>
               <Route path="lease-contract" element={<LeaseContract />} />
+              <Route path="customers" element={<CustomerList />} />
+              <Route path="customers/:id" element={<CustomerUpdate />} />
             </Route>
           </Routes>
         </Box>
