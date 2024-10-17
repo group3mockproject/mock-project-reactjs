@@ -1,0 +1,22 @@
+.view-contracts {
+  width: 100%;
+  
+  %flex-center {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+  }
+
+  &__actions {
+    @extend %flex-center;
+    justify-content: space-between;
+  }
+
+  &__search-area {
+    @extend %flex-center;
+  }
+
+  &__table {
+    width: 100%;
+  }
+}

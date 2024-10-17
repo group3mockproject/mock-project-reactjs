@@ -2,7 +2,6 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import "./ContractDetail.scss";
 
-// Dữ liệu mẫu cho hợp đồng
 const contractData = [
   {
     lease_id: 1,
@@ -17,7 +16,67 @@ const contractData = [
   {
     lease_id: 2,
     resident_id: 2,
-    apartment_id: 1,
+    apartment_id: 2,
+    start_date: "2024-02-01",
+    end_date: "2025-02-01",
+    rent_amount: 1500.0,
+    deposit_amount: 1500.0,
+    status: "Active",
+  },
+  {
+    lease_id: 3,
+    resident_id: 3,
+    apartment_id: 3,
+    start_date: "2024-02-01",
+    end_date: "2025-02-01",
+    rent_amount: 1500.0,
+    deposit_amount: 1500.0,
+    status: "Active",
+  },
+  {
+    lease_id: 4,
+    resident_id: 4,
+    apartment_id: 4,
+    start_date: "2024-02-01",
+    end_date: "2025-02-01",
+    rent_amount: 1500.0,
+    deposit_amount: 1500.0,
+    status: "Active",
+  },
+  {
+    lease_id: 5,
+    resident_id: 5,
+    apartment_id: 5,
+    start_date: "2024-02-01",
+    end_date: "2025-02-01",
+    rent_amount: 1500.0,
+    deposit_amount: 1500.0,
+    status: "Active",
+  },
+  {
+    lease_id: 6,
+    resident_id: 6,
+    apartment_id: 6,
+    start_date: "2024-02-01",
+    end_date: "2025-02-01",
+    rent_amount: 1500.0,
+    deposit_amount: 1500.0,
+    status: "Active",
+  },
+  {
+    lease_id: 7,
+    resident_id: 7,
+    apartment_id: 7,
+    start_date: "2024-02-01",
+    end_date: "2025-02-01",
+    rent_amount: 1500.0,
+    deposit_amount: 1500.0,
+    status: "Active",
+  },
+  {
+    lease_id: 8,
+    resident_id: 8,
+    apartment_id: 8,
     start_date: "2024-02-01",
     end_date: "2025-02-01",
     rent_amount: 1500.0,
