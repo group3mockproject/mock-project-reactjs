@@ -16,7 +16,7 @@ export function ConfirmPay() {
             <div className={styles.maintenance}>
                 <div className={styles.formPay}>
                     <div className={styles.formHeader}>
-                        <Link to={'/residents/payments'}><IoIosArrowBack/> Back</Link>
+                        <Link to={'/customer/payments'}><IoIosArrowBack/> Back</Link>
                         <h2>Confirm & Pay</h2>
                     </div>
                     <form action='#' method='post' className={styles.formBox}>

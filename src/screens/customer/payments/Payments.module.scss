@@ -450,9 +450,38 @@
         width: 100%;
         height: 40px;
         color: white;
+        border: none;
         background-color: #45A9EA;
+        outline: none;
+        border-radius: 10px;
+
+        &:hover {
+          background-color: #3d92ca;
+          color: white;
+        }
       }
     }
   }
 
 }
+
+@media screen and (max-width: 992px){
+  .payments {
+    .maintenance {
+      width: 100%;
+    }
+
+    .pay {
+      width: 80%;
+    }
+  }
+}
+
+@media screen and (max-width: 768px){
+  .payments {
+    .pay {
+      width: 100%;
+    }
+  }
+}
+

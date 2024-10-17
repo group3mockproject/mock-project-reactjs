@@ -9,12 +9,14 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import HomeScreen from "../screens/HomeScreen";
 import SiderComponent from "@/components/SiderComponent";
 import HeaderComponent from "@/components/HeaderComponent";
-import {EditResident} from "@/screens/residents/editResident/EditResident.jsx";
-import {Payments} from "@/screens/residents/payments/Payments.jsx";
-import {ConfirmPay} from "@/screens/residents/payments/ConfirmPay.jsx";
+import {EditResident} from "@/screens/customer/editResident/EditResident.jsx";
+import {Payments} from "@/screens/customer/payments/Payments.jsx";
+import {ConfirmPay} from "@/screens/customer/payments/ConfirmPay.jsx";
 
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
+import {ApartmentList} from "@/screens/customer/rentAnApartment/ApartmentList.jsx";
+import {ApartmentDetail} from "@/screens/customer/rentAnApartment/ApartmentDetail.jsx";
 
 const drawerWidth = 240;
 
@@ -72,6 +74,8 @@ export default function MainRoute() {
               <Route path="/residents/:id/edit" element={<EditResident/>}></Route>
               <Route path="/residents/payments/pay" element={<ConfirmPay/>}></Route>
               <Route path="/residents/payments" element={<Payments/>}></Route>
+              <Route path="/residents/rent-apartment" element={<ApartmentList/>}></Route>
+              <Route path="/residents/rent-apartment/:id" element={<ApartmentDetail/>}></Route>
           </Routes>
         </Box>
       </Box>

@@ -24,16 +24,10 @@ const SiderComponent = () => {
       path: "/financial",
     },
     {
-      key: "residents",
+      key: "customer",
       label: "Residents",
       icon: <LocalHotelIcon />,
-      path: "/residents",
-    },
-    {
-      key: "payments",
-      label: "Payment List & Payfee",
-      icon: '',
-      path: "/residents/payments",
+      path: "/customer",
     },
     {
       key: "inventory",
