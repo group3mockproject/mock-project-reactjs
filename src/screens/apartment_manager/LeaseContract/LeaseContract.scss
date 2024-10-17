@@ -16,6 +16,7 @@
 
     &__actions {
         @extend %flex-center;
+        flex-wrap: wrap;
         justify-content: space-between;
     }
 
@@ -25,5 +26,48 @@
 
     &__table {
         width: 100%;
+        overflow: auto;
+    }
+
+    &__modal {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__form {
+        background-color: white;
+        padding: 1em;
+        border-radius: 0.5em;
+
+        h2 {
+            text-align: center;
+            margin-top: 0;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 1em;
+        }
+    }
+
+    &__form-fields {
+        display: grid;
+        gap: 1em;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (width <= 45em) {
+    .lease-contract {
+        &__form {
+            height: 30em;
+            overflow-y: scroll;
+        }
+        &__form-fields {
+            display: grid;
+            gap: 1em;
+            grid-template-columns: 1fr;
+        }
     }
 }
