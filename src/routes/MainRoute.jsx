@@ -8,7 +8,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomeScreen from "../screens/home/HomeScreen.jsx";
 import SiderComponent from "@/components/SiderComponent";
 import HeaderComponent from "@/components/HeaderComponent";
-import MangerApartment from "@/screens/manger_apartment/MangerApartment.jsx";
+import MangerApartment from "@/screens/apartment_manager/manager_apartment/ManagerApartment.jsx";
+import CustomerEditProfile from "@/screens/customer/customer_edit_profile/CustomerEditProfile.jsx";
+import ViewPaymentHistory from "@/screens/customer/view_payment_history/ViewPaymentHistory.jsx";
+import ViewFinesList from "@/screens/customer/view_fines_list/ViewFinesList.jsx";
+import RegisterUtilities from "@/screens/customer/register_utilities/RegisterUtilities.jsx";
+import Card from "@/screens/customer/register_utilities/service_details/card/Card.jsx";
+import ServiceDetails from "@/screens/customer/register_utilities/service_details/ServiceDetails.jsx";
 
 const drawerWidth = 240;
 
@@ -52,6 +58,11 @@ export default function MainRoute() {
           <Routes>
             <Route path="/" element={<HomeScreen />}></Route>
               <Route path="/MangerApartment" element={<MangerApartment />}></Route>
+              <Route path="/CustomerEditProfile" element={<CustomerEditProfile />}></Route>
+              <Route path="/ViewPaymentHistory" element={<ViewPaymentHistory />}></Route>
+              <Route path="/ViewFinesList" element={<ViewFinesList />}></Route>
+              <Route path="/RegisterUtilities" element={<RegisterUtilities />}></Route>
+              <Route path="/ServiceDetails" element={<ServiceDetails />}></Route>
             {/* Example path Router here */}
           </Routes>
         </Box>

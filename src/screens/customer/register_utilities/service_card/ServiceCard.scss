@@ -1,0 +1,74 @@
+.service-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  .icon {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  h3 {
+    font-size: 22px;
+    margin: 10px 0;
+  }
+
+  .description {
+    color: #666;
+    margin-bottom: 15px;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  .more {
+    color: #3498db;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s;
+
+    &:hover {
+      color: #1d6fa5;
+      text-decoration: underline;
+    }
+  }
+
+  .subscribe-btn {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+
+    &.red {
+      background-color: #ff6b6b;
+      color: white;
+    }
+
+    &.green {
+      background-color: #4caf50;
+      color: white;
+    }
+
+    &.purple {
+      background-color: #9c27b0;
+      color: white;
+    }
+
+    &:hover {
+      transform: scale(1.05);
+      filter: brightness(90%);
+    }
+  }
+}

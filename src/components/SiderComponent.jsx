@@ -6,7 +6,11 @@ import ListItemText from "@mui/material/ListItemText";
 import HomeIcon from "@mui/icons-material/Home";
 import AddToPhotosIcon from "@mui/icons-material/AddToPhotos";
 import DomainIcon from '@mui/icons-material/Domain';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import { Link } from "react-router-dom";
+import PaymentsIcon from '@mui/icons-material/Payments';
+import BuildIcon from '@mui/icons-material/Build';
+import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 
 const SiderComponent = () => {
   const routes = [
@@ -23,12 +27,36 @@ const SiderComponent = () => {
       path: "/inventory",
     },
     {
-      key: "inventory",
+      key: "manage_apartment",
       label: "Manage Apartment",
       icon: <DomainIcon />,
       path: "/MangerApartment",
+    },
+    {
+      key: "customer_edit_profile",
+      label: "Customer Edit Profile",
+      icon: <ManageAccountsIcon />,
+      path: "/CustomerEditProfile",
     }
-
+    ,
+    {
+      key: "View_payment_history",
+      label: "View Payment History",
+      icon: <PaymentsIcon />,
+      path: "/ViewPaymentHistory",
+    } ,
+    {
+      key: "view_fines_list",
+      label: "View Fines List",
+      icon: <BuildIcon />,
+      path: "/ViewFinesList",
+    },
+    {
+      key: "register_utilities",
+      label: "Register Utilities",
+      icon: <FitnessCenterIcon />,
+      path: "/RegisterUtilities",
+    }
   ];
 
   return (
