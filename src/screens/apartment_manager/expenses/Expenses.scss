@@ -1,0 +1,64 @@
+.expenses {
+    &__form {
+        display: grid;
+        gap: 1em;
+    }
+
+    &__form-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1em;
+    }
+
+    &__financial-records {
+        display: grid;
+        gap: 1em;
+        ;
+    }
+
+    &__financial-record {
+        border: 1px solid #ccc;
+        border-radius: 0.5em;
+        padding: 0.5em 1em;
+
+        p {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #ccc;
+            padding: 0.25em;
+
+            span {
+                font-weight: bold;
+            }
+        }
+
+        &-last-item {
+            border: none !important;
+        }
+    }
+
+    &__chip {
+        color: white;
+        font-weight: bold;
+        border-radius: 1em;
+        padding: 0.25em 1em;
+        background-color: gray;
+    }
+}
+
+@media screen and (width > 60em) {
+    .expenses {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        gap: 1em;
+
+        &__financial-records {
+            height: 80vh;
+            overflow: auto;
+        }
+
+
+    }
+}
