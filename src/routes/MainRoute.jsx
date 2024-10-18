@@ -17,6 +17,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import CustomerList from "@/screens/apartment_manager/customers/list/CustomerList";
 import CustomerUpdate from "@/screens/apartment_manager/customers/update/CustomerUpdate";
+import Income from "../screens/apartment_manager/incomes/Income";
 
 const drawerWidth = 240;
 
@@ -81,6 +82,7 @@ export default function MainRoute() {
               <Route path="lease-contract" element={<LeaseContract />} />
               <Route path="customers" element={<CustomerList />} />
               <Route path="customers/:id" element={<CustomerUpdate />} />
+              <Route path="incomes" element={<Income />} />
             </Route>
           </Routes>
         </Box>

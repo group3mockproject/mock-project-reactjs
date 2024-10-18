@@ -1,0 +1,124 @@
+.income {
+ 
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    %card-style {
+        border-radius: 0.5em;
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    }
+
+    display: grid;
+    gap: 1em;
+
+    &__card {
+        @extend %card-style;
+    }
+
+    h2 {
+        padding: 0;
+        margin: 0;
+    }
+
+    &__line-chart {
+        overflow: auto;
+        padding: 1em;
+    }
+
+    &__table {
+        overflow: auto;
+    }
+
+    &__chip {
+        --chip-primary-color: #7a7a7a;
+        --chip-secondary-color: #f1f1f1;
+        background-color: var(--chip-secondary-color);
+        color: var(--chip-primary-color);
+        border: 2px solid currentColor;
+        border-radius: 1em;
+        padding: 1em;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 2em;
+        box-sizing: border-box;
+        margin-top: 0.7em;
+        width: max-content !important;
+    }
+
+    &__chip--new {
+        --chip-primary-color: #35b175;
+        --chip-secondary-color: #d2fde6;
+    }
+
+    &__chip--unqualified {
+        --chip-primary-color: #d91a1a;
+        --chip-secondary-color: #fff3f2;
+    }
+
+    &__chip--contacted {
+        --chip-primary-color: #004fcf;
+        --chip-secondary-color: #ddebff;
+    }
+
+    &__chip--reviewing {
+        --chip-primary-color: #5a21db;
+        --chip-secondary-color: #edeaff;
+    }
+
+    &__financial {
+        padding: 1em;
+        text-align: center;
+        line-height: 1.2;
+
+        h2, .income__text-blue {
+            font-size: 1.7rem;
+        }
+    }
+
+    &__text-blue {
+        color: #197BBD;
+    }
+
+    &__text-green {
+        color: #439A86;
+    }
+
+    &__text-red {
+        color: #BB4430;
+    }
+
+    &__text-gray {
+        color: #AEAEAE;
+    }
+
+    &__type-of-income {
+        padding: 1em;
+    }
+    &__circle-chart {
+        display: grid;
+        place-items: center;
+    }
+}
+
+@media screen and (width > 70em) {
+    .income {
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+
+        // &__table {
+        //     grid-template-rows: 2 / span 1;
+        // }
+
+        &__financial {
+            grid-column: 2 / span 1;
+            grid-row: 1/ span 1;
+            display: grid;
+            place-items: center;
+        }
+    }
+}
