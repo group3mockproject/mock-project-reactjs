@@ -19,6 +19,7 @@ import CustomerList from "@/screens/apartment_manager/customers/list/CustomerLis
 import CustomerUpdate from "@/screens/apartment_manager/customers/update/CustomerUpdate";
 import Income from "../screens/apartment_manager/incomes/Income";
 import Expenses from "@/screens/apartment_manager/expenses/Expenses";
+import ReviewCustomer from "@/screens/operations_manager/review_customer/ReviewCustomer";
 
 const drawerWidth = 240;
 
@@ -85,6 +86,9 @@ export default function MainRoute() {
               <Route path="customers/:id" element={<CustomerUpdate />} />
               <Route path="incomes" element={<Income />} />
               <Route path="expenses" element={<Expenses />} />
+            </Route>
+            <Route path="/operations" element={<Outlet />}>
+              <Route path="review-customers" element={<ReviewCustomer />} />
             </Route>
           </Routes>
         </Box>
