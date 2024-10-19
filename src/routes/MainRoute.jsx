@@ -20,6 +20,7 @@ import CustomerUpdate from "@/screens/apartment_manager/customers/update/Custome
 import Income from "../screens/apartment_manager/incomes/Income";
 import Expenses from "@/screens/apartment_manager/expenses/Expenses";
 import ReviewCustomer from "@/screens/operations_manager/review_customer/ReviewCustomer";
+import EditProfile from "@/screens/technical_staff/edit_profile/EditProfile";
 
 const drawerWidth = 240;
 
@@ -89,6 +90,9 @@ export default function MainRoute() {
             </Route>
             <Route path="/operations" element={<Outlet />}>
               <Route path="review-customers" element={<ReviewCustomer />} />
+            </Route>
+            <Route path="/technical-staff" element={<Outlet />}>
+              <Route path="edit-profile" element={<EditProfile />} />
             </Route>
           </Routes>
         </Box>
