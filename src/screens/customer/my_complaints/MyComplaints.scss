@@ -1,19 +1,53 @@
 .my-complaint {
   width: 100%;
-  
+
+  %flex-center {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+  }
+
   &__actions {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-  }
-
-  &__search-area {
-    display: flex;
-    gap: 10px;
+    margin-bottom: 1em;
   }
 
   &__table {
     width: 100%;
+    overflow: auto;
+  }
+
+  &__search-area {
+    @extend %flex-center;
+  }
+}
+
+.complaint-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__content {
+    background-color: white;
+    padding: 2em;
+    border-radius: 8px;
+    width: 600px;
+    text-align: center;
+
+    h5 {
+      text-transform: uppercase;  
+      margin-bottom: 16px;
+    }
+    
+    p {
+      text-align: left;
+      font-size: 1.125rem;
+      margin-bottom: 16px;
+    }
+    button {
+      margin-top: 16px;
+    }
   }
 }

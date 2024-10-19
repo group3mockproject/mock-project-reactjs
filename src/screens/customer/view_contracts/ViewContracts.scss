@@ -1,10 +1,15 @@
 .view-contracts {
   width: 100%;
-  
+
   %flex-center {
     display: flex;
     align-items: center;
     gap: 1em;
+  }
+
+  h1 {
+    text-transform: uppercase;
+    margin: 0;
   }
 
   &__actions {
@@ -18,5 +23,33 @@
 
   &__table {
     width: 100%;
+  }
+}
+
+.contract-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__content {
+    background-color: white;
+    padding: 2em;
+    border-radius: 8px;
+    width: 600px;
+    text-align: center;
+
+    h5 {
+      text-transform: uppercase;  
+      margin-bottom: 16px;
+    }
+    
+    p {
+      text-align: left;
+      font-size: 1.125rem;
+      margin-bottom: 16px;
+    }
+    button {
+      margin-top: 16px;
+    }
   }
 }

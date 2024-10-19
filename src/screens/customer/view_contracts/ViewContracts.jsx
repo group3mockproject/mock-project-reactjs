@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { Button, TextField } from "@mui/material";
-import { Link } from "react-router-dom";
-
+import { Button, TextField, Modal, Typography } from "@mui/material";
 import "./ViewContracts.scss";
 
 const contractData = [
@@ -20,8 +18,8 @@ const contractData = [
     lease_id: 2,
     resident_id: 2,
     apartment_id: 2,
-    start_date: "2024-02-01",
-    end_date: "2025-02-01",
+    start_date: "2024-01-01",
+    end_date: "2025-01-01",
     rent_amount: 1500.0,
     deposit_amount: 1500.0,
     status: "Active",
@@ -30,58 +28,8 @@ const contractData = [
     lease_id: 3,
     resident_id: 3,
     apartment_id: 3,
-    start_date: "2024-02-01",
-    end_date: "2025-02-01",
-    rent_amount: 1500.0,
-    deposit_amount: 1500.0,
-    status: "Active",
-  },
-  {
-    lease_id: 4,
-    resident_id: 4,
-    apartment_id: 4,
-    start_date: "2024-02-01",
-    end_date: "2025-02-01",
-    rent_amount: 1500.0,
-    deposit_amount: 1500.0,
-    status: "Active",
-  },
-  {
-    lease_id: 5,
-    resident_id: 5,
-    apartment_id: 5,
-    start_date: "2024-02-01",
-    end_date: "2025-02-01",
-    rent_amount: 1500.0,
-    deposit_amount: 1500.0,
-    status: "Active",
-  },
-  {
-    lease_id: 6,
-    resident_id: 6,
-    apartment_id: 6,
-    start_date: "2024-02-01",
-    end_date: "2025-02-01",
-    rent_amount: 1500.0,
-    deposit_amount: 1500.0,
-    status: "Active",
-  },
-  {
-    lease_id: 7,
-    resident_id: 7,
-    apartment_id: 7,
-    start_date: "2024-02-01",
-    end_date: "2025-02-01",
-    rent_amount: 1500.0,
-    deposit_amount: 1500.0,
-    status: "Active",
-  },
-  {
-    lease_id: 8,
-    resident_id: 8,
-    apartment_id: 8,
-    start_date: "2024-02-01",
-    end_date: "2025-02-01",
+    start_date: "2024-01-01",
+    end_date: "2025-01-01",
     rent_amount: 1500.0,
     deposit_amount: 1500.0,
     status: "Active",
@@ -92,6 +40,8 @@ const paginationModel = { page: 0, pageSize: 5 };
 
 const ViewContracts = () => {
   const [data, setData] = useState([]);
+  const [selectedContract, setSelectedContract] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const columns = [
     { field: "lease_id", headerName: "ID", width: 120 },
@@ -107,13 +57,13 @@ const ViewContracts = () => {
       headerName: "View",
       width: 160,
       renderCell: ({ row }) => (
-        <>
-          <Link to={`/customer/contracts/${row.lease_id}`}>
-            <Button variant="outlined" size="small">
-              View
-            </Button>
-          </Link>
-        </>
+        <Button
+          variant="outlined"
+          size="small"
+          onClick={() => handleViewContract(row)}
+        >
+          View
+        </Button>
       ),
     },
   ];
@@ -125,6 +75,16 @@ const ViewContracts = () => {
     }));
     setData(_data);
   }, []);
+
+  const handleViewContract = (contract) => {
+    setSelectedContract(contract);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedContract(null);
+    setIsModalOpen(false);
+  };
 
   return (
     <div className="view-contracts">
@@ -146,8 +106,55 @@ const ViewContracts = () => {
           sx={{ border: 0 }}
         />
       </div>
+
+      <ContractDetailModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        contract={selectedContract}
+      />
     </div>
   );
 };
+
+const ContractDetailModal = ({ isOpen, onClose, contract }) => (
+  <Modal open={isOpen} onClose={onClose} className="contract-modal">
+    <div className="contract-modal__content">
+      <Typography variant="h5">Contract Detail</Typography>
+      {contract ? (
+        <div>
+          <p>
+            <strong>ID:</strong> {contract.lease_id}
+          </p>
+          <p>
+            <strong>Resident ID:</strong> {contract.resident_id}
+          </p>
+          <p>
+            <strong>Apartment ID:</strong> {contract.apartment_id}
+          </p>
+          <p>
+            <strong>Start Date:</strong> {contract.start_date}
+          </p>
+          <p>
+            <strong>End Date:</strong> {contract.end_date}
+          </p>
+          <p>
+            <strong>Rent Amount:</strong> ${contract.rent_amount}
+          </p>
+          <p>
+            <strong>Deposit Amount:</strong> ${contract.deposit_amount}
+          </p>
+          <p>
+            <strong>Status:</strong> {contract.status}
+          </p>
+        </div>
+      ) : (
+        <p>No contract selected.</p>
+      )}
+      <Button variant="contained" onClick={onClose}>
+        Close
+      </Button>
+    </div>
+  </Modal>
+);
 
 export default ViewContracts;
