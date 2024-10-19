@@ -27,7 +27,7 @@ const SiderComponent = () => {
       key: "customer",
       label: "Residents",
       icon: <LocalHotelIcon />,
-      path: "/customer",
+      path: "/customers",
     },
     {
       key: "inventory",

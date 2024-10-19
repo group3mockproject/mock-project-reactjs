@@ -38,7 +38,7 @@ export function ApartmentList() {
                             <p className={styles.apartmentLocation}>{apartment.location}</p>
                         </div>
                         <div className={styles.availability}>
-                            <Link to={`/residents/rent-apartment/${index}`}>Check Availability</Link>
+                            <Link to={`/customers/rent-apartment/${index}`}>Check Availability</Link>
                         </div>
                     </div>
                 ))}
