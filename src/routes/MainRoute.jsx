@@ -9,7 +9,6 @@ import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import HomeScreen from "../screens/HomeScreen";
 import SiderComponent from "@/components/SiderComponent";
 import HeaderComponent from "@/components/HeaderComponent";
-import RegisterUtilities from "@/screens/customer/register_utilities/RegisterUtilities";
 import Timekeeping from "@/screens/admin/timekeeping/Timekeeping";
 import LeaseContract from "@/screens/apartment_manager/LeaseContract/LeaseContract";
 
@@ -75,9 +74,6 @@ export default function MainRoute() {
           <Toolbar />
           <Routes>
             <Route path="/" element={<HomeScreen />}></Route>
-            <Route path="/customer" element={<Outlet />}>
-              <Route path="register-utilities" element={<RegisterUtilities />} />
-            </Route>
             <Route path="/admin" element={<Outlet />}>
               <Route path="timekeeping" element={<Timekeeping />} />
             </Route>

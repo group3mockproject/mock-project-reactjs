@@ -1,5 +1,8 @@
 .income {
- 
+
+    display: grid;
+    gap: 1em;
+
     * {
         margin: 0;
         padding: 0;
@@ -11,8 +14,7 @@
         box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
     }
 
-    display: grid;
-    gap: 1em;
+
 
     &__card {
         @extend %card-style;
@@ -50,12 +52,14 @@
         width: max-content !important;
     }
 
-    &__chip--new {
+    // &__chip--new {
+    &__chip--paid {
         --chip-primary-color: #35b175;
         --chip-secondary-color: #d2fde6;
     }
 
-    &__chip--unqualified {
+    // &__chip--unqualified {
+    &__chip--pending {
         --chip-primary-color: #d91a1a;
         --chip-secondary-color: #fff3f2;
     }
@@ -75,7 +79,8 @@
         text-align: center;
         line-height: 1.2;
 
-        h2, .income__text-blue {
+        h2,
+        .income__text-blue {
             font-size: 1.7rem;
         }
     }
@@ -99,6 +104,7 @@
     &__type-of-income {
         padding: 1em;
     }
+
     &__circle-chart {
         display: grid;
         place-items: center;

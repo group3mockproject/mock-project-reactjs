@@ -1,33 +1,30 @@
-import React, { useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import { DataGrid } from '@mui/x-data-grid';
-import { Button, IconButton, Modal, TextField } from '@mui/material';
-import { CiEdit } from 'react-icons/ci'
-
-import './LeaseContract.scss'
+import { Autocomplete, Button, IconButton, Modal, TextField } from '@mui/material';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { CiEdit } from 'react-icons/ci'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
+import useFetch from '@/hooks/useFetch';
 
+import './LeaseContract.scss'
 
-
-const rows = [
-    { resident_id: 1, apartment_id: 1, start_date: '21-06-2024', end_date: '21-06-2026', rent_amount: 10000, deposit_amount: 5000, status: null },
-    { resident_id: 2, apartment_id: 2, start_date: '21-06-2024', end_date: '21-06-2026', rent_amount: 10000, deposit_amount: 5000, status: null },
-    { resident_id: 3, apartment_id: 3, start_date: '21-06-2024', end_date: '21-06-2026', rent_amount: 10000, deposit_amount: 5000, status: null },
-    { resident_id: 4, apartment_id: 4, start_date: '21-06-2024', end_date: '21-06-2026', rent_amount: 10000, deposit_amount: 5000, status: null },
-    { resident_id: 5, apartment_id: 5, start_date: '21-06-2024', end_date: '21-06-2026', rent_amount: 10000, deposit_amount: 5000, status: null },
-    { resident_id: 6, apartment_id: 6, start_date: '21-06-2024', end_date: '21-06-2026', rent_amount: 10000, deposit_amount: 5000, status: null },
-    { resident_id: 7, apartment_id: 7, start_date: '21-06-2024', end_date: '21-06-2026', rent_amount: 10000, deposit_amount: 5000, status: null },
-
-];
+/**
+ * { "id": 7, "resident_id": 7, "apartment_id": 7, "start_date": "2024-06-21", 
+ * "end_date": "2026-06-21", "rent_amount": 10000, "deposit_amount": 5000, "status": "Active" },
+ */
 
 const paginationModel = { page: 0, pageSize: 5 };
-
+const DataContext = createContext()
 
 const LeaseContract = () => {
-    const [data, setData] = useState([])
+
+    const { data } = useFetch({ url: import.meta.env.VITE_API_APARTMENT_MANAGER_LEASE_CONTRACTS })
+    const { data: residents } = useFetch({ url: import.meta.env.VITE_API_RESIDENTS })
+    const { data: apartments } = useFetch({ url: import.meta.env.VITE_API_APARTMENTS })
+
     const [isCreateFormOpen, setIsCreateFormOpen] = useState(false);
-    const [isUpdateFormOpen, setIsUpdateFormOpen] = useState(false);
+    const [dataForUpdate, setDataForUpdate] = useState(null);
 
     const columns = [
         { field: 'resident_id', headerName: 'RESIDENT ID', width: 140 },
@@ -42,57 +39,55 @@ const LeaseContract = () => {
             headerName: "Edit",
             sortable: false,
             // renderCell: ({ row }) => <IconButton onClick={() => alert(row.resident_id)}><CiEdit /></IconButton>
-            renderCell: ({ row }) => <IconButton onClick={() => setIsUpdateFormOpen(true)}><CiEdit /></IconButton>
+            renderCell: ({ row }) => <IconButton onClick={() => setDataForUpdate(row)}><CiEdit /></IconButton>
         },
     ]
 
-    useEffect(() => {
-        const _data = rows.map(row => ({ ...row, id: row.resident_id }))
-        setData(_data)
-    }, [])
     return (
-        <div className='lease-contract'>
-            <h1>MANAGE LEASE CONTRACTS</h1>
-            <div className='lease-contract__actions'>
-                <form className="lease-contract__search-area">
-                    <TextField label='Search...'
-                        size="small"
-                    />
-                    <Button variant='contained'>Search</Button>
-                </form>
-                <Button
-                    variant='contained'
-                    onClick={() => setIsCreateFormOpen(true)}
-                >Add New Contract</Button>
+        <DataContext.Provider value={{ residents, apartments }}>
+            <div className='lease-contract'>
+                <h1>MANAGE LEASE CONTRACTS</h1>
+                <div className='lease-contract__actions'>
+                    <form className="lease-contract__search-area">
+                        <TextField label='Search...'
+                            size="small"
+                        />
+                        <Button variant='contained'>Search</Button>
+                    </form>
+                    <Button
+                        variant='contained'
+                        onClick={() => setIsCreateFormOpen(true)}
+                    >Add New Contract</Button>
+                </div>
+                <div className='lease-contract__table'>
+                    {
+                        data && <DataGrid
+                            rows={data}
+                            columns={columns}
+                            initialState={{ pagination: { paginationModel } }}
+                            pageSizeOptions={[5, 10]}
+                            sx={{ border: 0 }}
+                        />
+                    }
+                </div>
+                {
+                    isCreateFormOpen &&
+                    <CreateFormModal isOpen={isCreateFormOpen}
+                        onClose={() => setIsCreateFormOpen(false)} />
+                }
+
+                {
+                    dataForUpdate && <UpdateFormModal
+                        inittialData={dataForUpdate} isOpen={dataForUpdate != null}
+                        onClose={() => setDataForUpdate(null)} />
+                }
             </div>
-            <div className='lease-contract__table'>
-                <DataGrid
-                    rows={data}
-                    columns={columns}
-                    initialState={{ pagination: { paginationModel } }}
-                    pageSizeOptions={[5, 10]}
-                    sx={{ border: 0 }}
-                />
-            </div>
-            <CreateFormModal isOpen={isCreateFormOpen} onClose={() => setIsCreateFormOpen(false)} />
-            <UpdateFormModal isOpen={isUpdateFormOpen} onClose={() => setIsUpdateFormOpen(false)} />
-        </div>
+        </DataContext.Provider>
     );
 }
 
 
 
-
-const formFields = [
-    { label: 'Resident ID', name: 'resident_id', disabled: false, type: 'number', multiline: false },
-    { label: 'Apartment ID', name: 'apartment_id', disabled: false, type: 'number', multiline: false },
-    { label: 'Start Date', name: 'start_date', disabled: false, type: 'date', multiline: false },
-    { label: 'End Date', name: 'end_date', disabled: false, type: 'date', multiline: false },
-    { label: 'Rent Amount', name: 'rent_amount', disabled: false, type: 'number', multiline: false },
-    { label: 'Deposit Amount', name: 'deposit_amount', disabled: false, type: 'number', multiline: false },
-    { label: 'Status', name: 'status', disabled: false, type: 'text', multiline: false },
-    { label: 'Term', name: 'term', disabled: false, type: 'text', multiline: true },
-]
 
 const CreateFormModal = ({ isOpen = false, onClose }) => {
     const [data, setData] = useState({
@@ -113,7 +108,15 @@ const CreateFormModal = ({ isOpen = false, onClose }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log({ data })
+        const payload = {
+            ...data,
+            start_date: data.start_date.format('YYYY-MM-DD'),
+            end_date: data.end_date.format('YYYY-MM-DD'),
+            apartment_id: data.apartment_id.id,// <Autocomple/> return apartment object
+            resident_id: data.resident_id.id // <Autocomple/> return resident object
+        }
+        // console.log({ data })
+        console.log({ payload })
     }
 
     return (
@@ -125,8 +128,8 @@ const CreateFormModal = ({ isOpen = false, onClose }) => {
             <div>
                 <form onSubmit={handleSubmit} className="lease-contract__form">
                     <h2>Create new lease contract</h2>
-                    <FormContent formFields={formFields} data={data} onChange={handleChange} />
-                    <Button type='submit' variant='contained'>CREATE</Button>
+                    <FormContent data={data} onChange={handleChange} />
+                    <Button className='lease-contract__form-button' type='submit' variant='contained'>CREATE</Button>
                 </form>
             </div>
         </Modal>
@@ -134,17 +137,34 @@ const CreateFormModal = ({ isOpen = false, onClose }) => {
 }
 
 
-const UpdateFormModal = ({ contractId, isOpen = false, onClose }) => {
-    const [data, setData] = useState({
-        resident_id: '',
-        apartment_id: '',
-        start_date: dayjs(),
-        end_date: dayjs(),
-        rent_amount: '',
-        deposit_amount: '',
-        status: '',
-        term: '',
+const UpdateFormModal = ({ inittialData, isOpen = false, onClose }) => {
+
+    const { residents, apartments } = useContext(DataContext)
+    const resident = residents.find(r => r.id === inittialData.resident_id)
+    const apartment = apartments.find(a => a.id === inittialData.apartment_id)
+    const mappedData = (data) => {
+        return {
+            ...data,
+            start_date: dayjs(data.start_date),
+            end_date: dayjs(data.end_date),
+            resident_id: { ...resident, label: `${resident.id} (${resident.name})` },
+            apartment_id: { ...apartment, label: `${apartment.id} (${apartment.name})` }
+        };
+    }
+    const { data, setData, isLoading } = useFetch({
+        url: import.meta.env.VITE_API_APARTMENT_MANAGER_LEASE_CONTRACTS + `/${inittialData.id}`,
+        mappedData
     })
+    // const [data, setData] = useState({
+    //     resident_id: '',
+    //     apartment_id: '',
+    //     start_date: dayjs(),
+    //     end_date: dayjs(),
+    //     rent_amount: '',
+    //     deposit_amount: '',
+    //     status: '',
+    //     term: '',
+    // })
 
     const handleChange = ({ key, value }) => {
         // setData({ ...data, [e.target.name]: e.target.value })
@@ -153,8 +173,18 @@ const UpdateFormModal = ({ contractId, isOpen = false, onClose }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log({ data })
+        const payload = {
+            ...data,
+            start_date: data.start_date.format('YYYY-MM-DD'),
+            end_date: data.end_date.format('YYYY-MM-DD'),
+            apartment_id: data.apartment_id.id,// <Autocomple/> return apartment object
+            resident_id: data.resident_id.id // <Autocomple/> return resident object
+        }
+        // console.log({ data })
+        console.log({ payload })
     }
+
+
 
     return (
         <Modal
@@ -165,30 +195,65 @@ const UpdateFormModal = ({ contractId, isOpen = false, onClose }) => {
             <div>
                 <form onSubmit={handleSubmit} className="lease-contract__form">
                     <h2>Update lease contract</h2>
-                    <FormContent formFields={formFields} data={data} onChange={handleChange} />
-                    <Button type='submit' variant='contained'>UPDATE</Button>
+                    {
+                        isLoading && <div> Loading...</div>
+                    }
+                    {(data && typeof (data.start_date) !== 'string') &&
+                        <FormContent data={data} onChange={handleChange} />
+                    }
+                    <Button className='lease-contract__form-button' type='submit' variant='contained'>UPDATE</Button>
                 </form>
             </div>
         </Modal>
     )
 }
 
-const FormContent = ({ formFields = [], data, onChange }) => {
+const FormContent = ({ data, onChange }) => {
+
+    const { residents, apartments } = useContext(DataContext)
+
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
             <div className="lease-contract__form-fields">
                 {
-                    formFields.map((field) => (
-                        field.type != 'date'
-                            ? <TextField {...field}
-                                key={field.name} value={data[field.name]}
-                                onChange={(e) => onChange({ key: field.name, value: e.target.value })} />
-                            // : <DatePicker {...field} key={field.name} value={data[field.name]} onChange={onChange} />
-                            : <DatePicker {...field}
-                                key={field.name} value={data[field.name]}
-                                onChange={newValue => onChange({ key: field.name, value: newValue })} />
-                    ))
+                    residents && <Autocomplete
+                        required
+                        // getOptionLabel={(option) => option.name}
+                        options={residents.map(i => ({ ...i, label: `${i.id} (${i.name})` }))}
+                        value={data.resident_id}
+                        onChange={(e, newValue) => onChange({ key: 'resident_id', value: newValue })}
+                        renderInput={(params) => <TextField required {...params} label="Resident ID" />}
+                    />
                 }
+                {
+                    apartments && <Autocomplete
+                        required
+                        // getOptionLabel={(option) => option.name}
+                        options={apartments.map(i => ({ ...i, label: `${i.id} (${i.name})` }))}
+                        value={data.apartment_id}
+                        onChange={(e, newValue) => onChange({ key: 'apartment_id', value: newValue })}
+                        renderInput={(params) => <TextField required {...params} label="Apartment ID" />}
+                    />
+                }
+
+                <DatePicker label='Start Date' value={data.start_date}
+                    onChange={(newValue) => onChange({ key: 'start_date', value: newValue })}
+                />
+                <DatePicker label='End Date' value={data.end_date}
+                    onChange={(newValue) => onChange({ key: 'end_date', value: newValue })}
+                />
+                <TextField label='Rent Amount' type='number' value={data.rent_amount}
+                    onChange={(e) => onChange({ key: 'rent_amount', value: e.target.value })}
+                />
+                <TextField label='Deposit Amount' type='number' value={data.deposit_amount}
+                    onChange={(e) => onChange({ key: 'deposit_amount', value: e.target.value })}
+                />
+                <TextField label='Term' type='text' value={data.term} multiline={true}
+                    onChange={(e) => onChange({ key: 'term', value: e.target.value })}
+                />
+                <TextField label='Status' type='text' value={data.status}
+                    onChange={(e) => onChange({ key: 'status', value: e.target.value })}
+                />
             </div>
         </LocalizationProvider>
     )

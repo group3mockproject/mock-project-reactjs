@@ -45,10 +45,12 @@
             margin-top: 0;
         }
 
-        button {
-            width: 100%;
-            margin-top: 1em;
-        }
+
+    }
+
+    &__form-button {
+        width: 100%;
+        margin-top: 1em !important;
     }
 
     &__form-fields {
@@ -58,12 +60,13 @@
     }
 }
 
-@media screen and (width <= 45em) {
+@media screen and (width <=45em) {
     .lease-contract {
         &__form {
             height: 30em;
             overflow-y: scroll;
         }
+
         &__form-fields {
             display: grid;
             gap: 1em;
