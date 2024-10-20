@@ -17,6 +17,8 @@ import MyComplaints from "@/screens/customer/my_complaints/MyComplaints";
 import MaintenanceRequests from "@/screens/customer/maintenance_requests/MaintenanceRequests";
 import EditProfileApartmentManager from "@/screens/apartment_manager/edit_profile/EditProfile";
 import EditProfileOperationManager from "@/screens/operations_manager/edit_profile/EditProfile";
+import ReviewEquipment from "@/screens/operations_manager/review_equipment/ReviewEquipment";
+import DetailReviewEquipment from "@/screens/operations_manager/review_equipment/DetailReviewEquipment";
 
 const drawerWidth = 240;
 
@@ -91,6 +93,11 @@ export default function MainRoute() {
               <Route
                 path="edit-profile"
                 element={<EditProfileOperationManager />}
+              />
+              <Route path="review-equipment" element={<ReviewEquipment />} />
+              <Route
+                path="review-equipment/:id"
+                element={<DetailReviewEquipment />}
               />
             </Route>
 
