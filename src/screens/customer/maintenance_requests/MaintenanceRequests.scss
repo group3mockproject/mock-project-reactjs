@@ -1,0 +1,51 @@
+.maintenance-requests {
+  width: 100%;
+  
+  h1 {
+    margin: 0;
+  }
+
+  &__search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  &__search-area {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__table {
+    width: 100%;
+  }
+}
+
+.request-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__content {
+    background-color: white;
+    padding: 2em;
+    border-radius: 8px;
+    width: 600px;
+    text-align: center;
+
+    h5 {
+      text-transform: uppercase;  
+      margin-bottom: 16px;
+    }
+    
+    p {
+      text-align: left;
+      font-size: 1.125rem;
+      margin-bottom: 16px;
+    }
+    button {
+      margin-top: 16px;
+    }
+  }
+}

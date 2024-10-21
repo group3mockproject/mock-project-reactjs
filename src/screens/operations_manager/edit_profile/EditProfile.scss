@@ -1,0 +1,43 @@
+.operations_manager_edit_profile {
+    &__profile-picture {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1em;
+      gap: 1em;
+  
+      img {
+        width: 10em;
+        height: 10em;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+  
+    &__fields {
+      display: grid;
+      gap: 1em;
+    }
+  
+    &__button-group {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1em;
+    }
+  }
+  
+  @media screen and (min-width: 60em) {
+    .operations_manager_edit_profile {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+  
+      &__fields {
+        grid-template-columns: 1fr 1fr;
+      }
+  
+      &__button-group {
+        grid-column: 2 / span 1;
+      }
+    }
+  }
+  
