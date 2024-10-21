@@ -1,0 +1,70 @@
+.service-contract {
+  width: 100%;
+
+  h1 {
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  &__search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1em;
+
+    &-area {
+      display: flex;
+      gap: 1em;
+    }
+  }
+
+  &__table {
+    width: 100%;
+  }
+
+  .contract-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__content {
+      background-color: white;
+      padding: 2em;
+      border-radius: 8px;
+      width: 600px;
+      max-width: 100%;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+      h5 {
+        text-transform: uppercase;
+        margin-bottom: 16px;
+      }
+
+      p {
+        text-align: left;
+        font-size: 1.125rem;
+        margin-bottom: 16px;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 10px;
+
+        .MuiTextField-root {
+          width: 100%;
+        }
+
+        button {
+          align-self: flex-end;
+        }
+      }
+
+      button {
+        margin-top: 16px;
+      }
+    }
+  }
+}

@@ -19,6 +19,7 @@ import EditProfileApartmentManager from "@/screens/apartment_manager/edit_profil
 import EditProfileOperationManager from "@/screens/operations_manager/edit_profile/EditProfile";
 import ReviewEquipment from "@/screens/operations_manager/review_equipment/ReviewEquipment";
 import DetailReviewEquipment from "@/screens/operations_manager/review_equipment/DetailReviewEquipment";
+import ServiceContract from "@/screens/apartment_manager/service_contract/ServiceContract";
 
 const drawerWidth = 240;
 
@@ -88,6 +89,7 @@ export default function MainRoute() {
                 path="edit-profile"
                 element={<EditProfileApartmentManager />}
               />
+              <Route path="service-contract" element={<ServiceContract />} />
             </Route>
             <Route path="/operations" element={<Outlet />}>
               <Route

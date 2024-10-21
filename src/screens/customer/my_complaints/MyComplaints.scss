@@ -1,6 +1,11 @@
 .my-complaint {
   width: 100%;
 
+  h1 {
+    margin: 0;
+    text-transform: uppercase;
+  }
+
   %flex-center {
     display: flex;
     align-items: center;
@@ -20,7 +25,8 @@
   }
 
   &__search-area {
-    @extend %flex-center;
+    display: flex;
+    gap: 1em;
   }
 }
 

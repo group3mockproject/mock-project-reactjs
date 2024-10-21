@@ -1,84 +1,83 @@
 .review-equipment {
+  width: 100%;
+  
+  h1 {
+      margin: 0;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1em;
+  }
+
+  &__table {
     width: 100%;
-    
-    h1 {
-        margin: 0;
+    overflow: auto;
+  }
+
+  .MuiDataGrid-root {
+    border: none;
+  }
+
+  .MuiButtonBase-root {
+    margin-right: 5px;
+  }
+
+  .approve-button {
+    background-color: #4caf50;
+    color: white;
+
+    &:hover {
+      background-color: #45a049;
+    }
+  }
+
+  .reject-button {
+    background-color: #f44336;
+    color: white;
+
+    &:hover {
+      background-color: #d32f2f;
+    }
+  }
+
+  .view-button {
+    color: #1976d2;
+    border-color: #1976d2;
+
+    &:hover {
+      background-color: rgba(25, 118, 210, 0.04);
+    }
+  }
+}
+
+.equipment-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__content {
+    background-color: white;
+    padding: 2em;
+    border-radius: 8px;
+    width: 600px;
+    text-align: center;
+
+    h5 {
+      text-transform: uppercase;
+      margin-bottom: 16px;
     }
 
-    &__actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1em;
+    p {
+      text-align: left;
+      font-size: 1.125rem;
+      margin-bottom: 16px;
     }
-  
-    &__table {
-      width: 100%;
-      overflow: auto;
-    }
-  
-    .MuiDataGrid-root {
-      border: none;
-    }
-  
-    .MuiButtonBase-root {
-      margin-right: 5px;
-    }
-  
-    .approve-button {
-      background-color: #4caf50;
-      color: white;
-  
-      &:hover {
-        background-color: #45a049;
-      }
-    }
-  
-    .reject-button {
-      background-color: #f44336;
-      color: white;
-  
-      &:hover {
-        background-color: #d32f2f;
-      }
-    }
-  
-    .view-button {
-      color: #1976d2;
-      border-color: #1976d2;
-  
-      &:hover {
-        background-color: rgba(25, 118, 210, 0.04);
-      }
+
+    button {
+      margin-top: 16px;
     }
   }
-  
-  .equipment-modal {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  
-    &__content {
-      background-color: white;
-      padding: 2em;
-      border-radius: 8px;
-      width: 600px;
-      text-align: center;
-  
-      h5 {
-        text-transform: uppercase;
-        margin-bottom: 16px;
-      }
-  
-      p {
-        text-align: left;
-        font-size: 1.125rem;
-        margin-bottom: 16px;
-      }
-  
-      button {
-        margin-top: 16px;
-      }
-    }
-  }
-  
+}
