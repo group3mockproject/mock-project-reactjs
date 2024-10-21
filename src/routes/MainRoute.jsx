@@ -5,6 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import HomeScreen from "@/screens/HomeScreen";
 import SiderComponent from "@/components/SiderComponent";
@@ -37,6 +38,27 @@ import EditProfileOperationManager from "@/screens/operations_manager/edit_profi
 import ReviewEquipment from "@/screens/operations_manager/review_equipment/ReviewEquipment";
 import DetailReviewEquipment from "@/screens/operations_manager/review_equipment/DetailReviewEquipment";
 
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import HomeScreen from "../screens/HomeScreen";
+import SiderComponent from "@/components/SiderComponent";
+import HeaderComponent from "@/components/HeaderComponent";
+import {Payments} from "@/screens/customer/payments/Payments.jsx";
+import {ConfirmPay} from "@/screens/customer/payments/ConfirmPay.jsx";
+
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
+import {ApartmentList} from "@/screens/customer/rentAnApartment/ApartmentList.jsx";
+import {ApartmentDetail} from "@/screens/customer/rentAnApartment/ApartmentDetail.jsx";
+import {ModalsPictures} from "@/components/modals/ModalsPictures.jsx";
+import {usePictures} from "@/core/contexts/ModalPicturesContext.jsx";
+import {FinesList} from "@/screens/apartment_manager/manage_fines/FinesList.jsx";
+import {FinesCreate} from "@/screens/apartment_manager/manage_fines/FinesCreate.jsx";
+import {MaintenanceSchedule} from "@/screens/apartment_manager/manage-maintainance-schedule/MaintenanceSchedule.jsx";
+import {ManageEvent} from "@/screens/apartment_manager/manage_event/ManageEvent.jsx";
+import {ManageBuildings} from "@/screens/landlord/manage-buildings/ManageBuildings.jsx";
+import {BuildingEdit} from "@/screens/landlord/manage-buildings/BuildingEdit.jsx";
+
+
 const drawerWidth = 240;
 
 export default function MainRoute() {
@@ -44,12 +66,21 @@ export default function MainRoute() {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // Kiểm tra nếu là màn hình nhỏ
   const [open, setOpen] = React.useState(false);
 
+  const {
+      isOpen,
+      pictures,
+      toggleIsOpenModal,
+  } = usePictures();
+
   const handleDrawerToggle = () => {
     setOpen(!open);
   };
 
+    const handleClosePictureModal = () => {
+        toggleIsOpenModal(false);
+    }
+
   return (
-    <BrowserRouter>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar
@@ -90,6 +121,7 @@ export default function MainRoute() {
           <Toolbar />
           <Routes>
             <Route path="/" element={<HomeScreen />}></Route>
+
             <Route path="/MangerApartment" element={<MangerApartment />}></Route>
             <Route path="/CustomerEditProfile" element={<CustomerEditProfile />}></Route>
             <Route path="/ViewPaymentHistory" element={<ViewPaymentHistory />}></Route>
@@ -122,9 +154,25 @@ export default function MainRoute() {
             <Route path="/admin" element={<Outlet />}>
               <Route path="timekeeping" element={<Timekeeping />} />
             </Route>
+
+              <Route path="/customers/payments/pay" element={<ConfirmPay/>}></Route>
+              <Route path="/customers/payments" element={<Payments/>}></Route>
+              <Route path="/customers/rent-apartment" element={<ApartmentList/>}></Route>
+              <Route path="/customers/rent-apartment/:id" element={<ApartmentDetail/>}></Route>
+              <Route path="/apartment-manager/fines" element={<FinesList/>}></Route>
+              <Route path="/apartment-manager/fines/create" element={<FinesCreate/>}></Route>
+              <Route path="/apartment-manager/maintenance-schedule" element={<MaintenanceSchedule/>}></Route>
+              <Route path="/apartment-manager/manage-events" element={<ManageEvent/>}></Route>
+              <Route path="/landlord/manage-buildings" element={<ManageBuildings/>}></Route>
+              <Route path="/landlord/manage-buildings/create" element={<BuildingEdit/>}></Route>
+              <Route path="/landlord/manage-buildings/:id/edit" element={<BuildingEdit/>}></Route>
           </Routes>
         </Box>
+          <ModalsPictures
+              isOpen={isOpen}
+              onClose={handleClosePictureModal}
+              listPictures={pictures}
+          />
       </Box>
-    </BrowserRouter>
   );
 }

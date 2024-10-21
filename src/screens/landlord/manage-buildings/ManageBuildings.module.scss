@@ -1,0 +1,314 @@
+.manageBuildings {
+  padding: 20px;
+
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .manageHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    .searchBar {
+      display: flex;
+      justify-content: space-between;
+      width: 30%;
+
+      input {
+        flex: 1;
+        padding: 8px 12px;
+        border: 1px solid #ccc;
+        border-radius: 5px 0 0 5px;
+        outline: none;
+      }
+
+      button {
+        background-color: #6C63FF;
+        color: white;
+        padding: 8px 12px;
+        border: none;
+        cursor: pointer;
+        border-radius: 0 5px 5px 0;
+        svg {
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+
+    .addBuilding {
+      background-color: rgba(178, 209, 190, 0.68);
+      color: #00C853;
+      padding: 10px 20px;
+      border: 2px solid #00C853;
+      border-radius: 15px;
+      cursor: pointer;
+      font-weight: 550;
+
+      &:hover {
+        background-color: #00C853;
+        color: white;
+      }
+    }
+  }
+
+
+
+  .buildingCard {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+
+    .buildingHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      background-color: #ccc;
+      padding: 5px 10px;
+      border-bottom: 2px solid #919191;
+      transition: border-radius 0.3s ease;
+
+      h3 {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+      }
+
+      .buttonShowContent {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+
+        svg {
+          width: 30px;
+          height: 30px;
+          color: #6C63FF;
+        }
+      }
+    }
+  }
+
+  .buildingContent {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    justify-content: space-around;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    &.activeContent {
+      max-height: 500px;
+      transition: max-height 0.4s ease;
+    }
+
+    .buildingInfo {
+      height: 90%;
+      width: 35%;
+      p {
+        margin: 4px 0;
+      }
+    }
+
+    .buildingExtra {
+      height: 90%;
+      width: 55%;
+      border-left: 2px solid #ccc;
+      padding-left: 20px;
+      ul {
+        display: flex;
+        padding-left: 20px;
+        li {
+          margin-left: 30px;
+        }
+      }
+    }
+
+    .blocks {
+      margin: 10px 0;
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+
+        tbody {
+          tr {
+            border-bottom: 1px solid #ccc;
+            &:hover {
+              background-color: #bababa;
+            }
+          }
+        }
+
+        th, td {
+          padding: 3px;
+          text-align: left;
+        }
+
+        th {
+          background-color: #45A9EA;
+          color: white;
+        }
+      }
+    }
+
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      width: 100%;
+      margin: 10px;
+      .editBtn, .deleteBtn {
+        width: 80px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 8px 12px;
+        border: none;
+        cursor: pointer;
+        border-radius: 15px;
+        margin-left: 10px;
+        font-weight: 550;
+      }
+
+      .editBtn {
+        background-color: rgba(108, 99, 255, 0.31);
+        border: 1px solid #6C63FF;
+        color: #6C63FF;
+
+        &:hover {
+          background-color: #6C63FF;
+          color: white;
+        }
+      }
+
+      .deleteBtn {
+        background-color: rgba(255, 77, 79, 0.21);
+        border: 1px solid #ff4d4f;
+        color: #ff4d4f;
+
+        &:hover {
+          background-color: #ff4d4f;
+          color: white;
+        }
+      }
+    }
+  }
+
+  .page {
+    margin: 40px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .pageA{
+      margin-right: 10px;
+      color: #000;
+      text-decoration: none;
+      padding: 7px;
+      border-radius: 10px;
+      cursor: pointer;
+
+
+      &:hover {
+        background-color: #45A9EA;
+        color: white;
+      }
+      &.active {
+        background-color: #45A9EA;
+        color: white;
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .manageBuildings {
+    padding: 10px;
+
+    .manageHeader {
+      .searchBar {
+        width: 50%;
+      }
+    }
+
+    .buildingCard {
+      .buildingHeader {
+        h3 {
+          font-size: 1rem;
+        }
+      }
+    }
+
+    .buildingContent {
+      .buildingInfo {
+        width: 90%;
+      }
+
+      .buildingExtra {
+        width: 90%;
+        border-left: none;
+        padding-left: 0;
+      }
+    }
+
+    .blocks {
+
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .manageBuildings {
+    padding: 5px;
+
+    .manageHeader {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .searchBar {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      .addBuilding {
+        width: 100%;
+        text-align: center;
+      }
+    }
+    .buildingCard {
+      margin-bottom: 10px;
+      .buildingHeader h3 {
+        font-size: 0.9rem;
+      }
+
+      .buildingExtra {
+        ul {
+          padding-left: 5px;
+          li {
+            margin-left: 18px;
+          }
+        }
+      }
+    }
+
+    .page {
+      button {
+        padding: 5px 10px;
+      }
+    }
+  }
+}
+

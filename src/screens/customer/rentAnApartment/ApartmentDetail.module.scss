@@ -1,0 +1,347 @@
+.apartmentDetail {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 5px;
+
+  .apartmentInfo {
+    width: 65%;
+    .listImages {
+      width: 100%;
+      height: 350px;
+      display: flex;
+      gap: 5px;
+      justify-content: center;
+      align-items: flex-start;
+      border-radius: 5px;
+
+      .mainImage {
+        width: 70%;
+        height: 100%;
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 5px 0 0 5px;
+        }
+      }
+
+      .childImages {
+        width: 30%;
+        height: 350px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        flex-direction: column;
+        img {
+          width: 100%;
+          height: 50%;
+        }
+
+        .imgSecond {
+          border-radius: 0 5px 0 0;
+        }
+
+        .imgThird {
+          border-radius: 0 0 5px 0;
+        }
+
+        .showMore {
+          position: absolute;
+          bottom: 5px;
+          right: 5px;
+          background-color: rgba(0, 0, 0, 0.63);
+          width: 60px;
+          height: 30px;
+          border-radius: 5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: white;
+          font-size: 0.7rem;
+
+          svg {
+            color: white;
+            margin-right: 5px;
+          }
+
+        }
+      }
+
+    }
+
+    .information {
+      width: 100%;
+      padding: 10px;
+      position: relative;
+
+      p {
+        margin: 0;
+      }
+
+      .apartmentFee {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        p {
+          margin-right: 10px;
+          font-weight: 500;
+          font-size: 1rem;
+        }
+
+        p.old {
+          color: #8f8f8f;
+          text-decoration: line-through;
+        }
+      }
+
+      span {
+        color: #8f8f8f;
+        margin: 0 10px 0 0;
+      }
+
+      p.apartmentName {
+        font-size: 1.2rem;
+        font-weight: 550;
+      }
+
+      p.apartmentLocation {
+        color: #8f8f8f;
+        font-size: 0.9rem;
+      }
+    }
+
+    .highlight {
+      width: 100%;
+      border-radius: 10px;
+      border: 2px solid #ccc;
+
+      .title {
+        font-size: 1rem;
+        font-weight: 550;
+        padding: 10px;
+        margin: 0;
+      }
+
+      .highlightList {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5px;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 20px;
+
+        .highlightItem {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          width: 100%;
+          padding: 0 20px;
+
+          p {
+            width: 50%;
+          }
+
+          p.highlightContent {
+            font-weight: 550;
+          }
+        }
+      }
+    }
+  }
+
+  .rentApartment {
+    width: 30%;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    .rentForm {
+      width: 100%;
+      text-align: center;
+
+      .formGroup {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 5px;
+        padding: 10px 0;
+
+        button {
+          width: 100%;
+          height: 40px;
+          color: white;
+          border: none;
+          background-color: #45A9EA;
+          outline: none;
+          border-radius: 10px;
+
+          &:hover {
+            background-color: #3d92ca;
+            color: white;
+          }
+        }
+
+        .apartmentName {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          p {
+            margin: 0;
+            padding: 5px;
+            font-size: 0.9rem;
+          }
+          p.name {
+            font-weight: 550;
+          }
+        }
+        .formElement {
+          width: 100%;
+          position: relative;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+
+          label {
+            font-size: 0.8rem;
+          }
+
+          input, textarea {
+            height: 40px;
+            width: 100%;
+            outline: none;
+            border-radius: 5px;
+            border: none;
+            background-color: #f1f1f1;
+            margin: 5px;
+            padding: 10px;
+          }
+
+          textarea {
+            height: 70px;
+            padding: 20px 5px;
+          }
+
+          .labelMessage {
+            position: absolute;
+            font-size: 0.7rem;
+            font-weight: 550;
+            top: 10px;
+            left: 10px;
+          }
+        }
+
+        .elementName {
+          width: 58%;
+        }
+        .elementPhone {
+          width: 40%;
+        }
+
+        input[type='checkbox'] {
+          width: 13px;
+          height: 13px;
+          border-radius: 5px;
+        }
+
+      }
+
+      .btnSubmit {
+        border-bottom: 1px solid #ccc;
+        padding: 10px;
+      }
+
+      .availability {
+        width: 100%;
+        height: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        a {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          height: 35px;
+          background-color: transparent;
+          border: #3d92ca 2px solid;
+          border-radius: 10px;
+          font-weight: 550;
+          color: #3d92ca;
+          text-decoration: none;
+
+          &:hover {
+            background-color: #3d92ca;
+            color: white;
+          }
+        }
+      }
+      .rules {
+        font-size: 0.6rem;
+        width: 100%;
+        text-align: left;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 992px){
+  .apartmentDetail {
+    .apartmentInfo {
+      width: 100%;
+    }
+    .rentApartment {
+      width: 80%;
+    }
+  }
+}
+
+@media screen and (max-width: 480px){
+  .apartmentDetail {
+    .apartmentInfo {
+      width: 100%;
+      .listImages {
+        height: 250px;
+
+        .childImages {
+          height: 250px;
+        }
+      }
+      .highlight {
+        .highlightList {
+          grid-template-columns: 1fr;
+
+          .highlightItem {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+            padding: 0 20px;
+          }
+        }
+      }
+    }
+
+    .rentApartment {
+      width: 100%;
+    }
+  }
+}

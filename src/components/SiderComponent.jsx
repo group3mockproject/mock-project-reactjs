@@ -9,12 +9,18 @@ import HomeIcon from "@mui/icons-material/Home";
 import AddToPhotosIcon from "@mui/icons-material/AddToPhotos";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";  // Icons for expand/collapse
 import { Link } from "react-router-dom";
+
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import DomainIcon from '@mui/icons-material/Domain';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import BuildIcon from '@mui/icons-material/Build';
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
+import LocalHotelIcon from '@mui/icons-material/LocalHotel';
+import ApartmentIcon from '@mui/icons-material/Apartment';
+
 
 const SiderComponent = () => {
   const [open, setOpen] = useState(false);
@@ -29,6 +35,64 @@ const SiderComponent = () => {
       label: "Manage Account",
       icon: <AccountBoxIcon />,
       path: "/manage_account",
+    },
+    {
+      key: "financial",
+      label: "Financial",
+      icon: <CurrencyExchangeIcon />,
+      path: "/financial",
+    },
+    {
+      key: "customer",
+      label: "Customers",
+      icon: <LocalHotelIcon />,
+      children: [
+        {
+          key: "payments",
+          label: "Payment list & Pay fee",
+          path: "/customers/payments",
+        },
+        {
+          key: "rent-an-apartment",
+          label: "Rent an apartment",
+          path: "/customers/rent-apartment",
+        },
+      ]
+    },
+    {
+      key: "apartment-manager",
+      label: "Apartment Manager",
+      icon: <ApartmentIcon />,
+      children: [
+        {
+          key: "manage-fines",
+          label: "Manage Fines",
+          path: "/apartment-manager/fines",
+        },
+        {
+          key: "maintenance-schedule",
+          label: "Maintenance Schedules",
+          path: "/apartment-manager/maintenance-schedule",
+        },
+        {
+          key: "manage-events",
+          label: "Manage Events",
+          path: "/apartment-manager/manage-events",
+        },
+      ]
+    },
+    {
+      key: "landlord",
+      label: "Landlord",
+      icon: <ApartmentIcon />,
+      children: [
+        {
+          key: "manage-buildings",
+          label: "Manage Buildings",
+          path: "/landlord/manage-buildings",
+        },
+
+      ]
     },
     {
       key: "inventory",
