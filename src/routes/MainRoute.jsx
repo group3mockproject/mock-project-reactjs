@@ -5,14 +5,26 @@ import CssBaseline from "@mui/material/CssBaseline";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import HomeScreen from "../screens/HomeScreen";
 import SiderComponent from "@/components/SiderComponent";
 import HeaderComponent from "@/components/HeaderComponent";
+
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import Manage_Account from "@/screens/admin/manage_account/Manage_Account";
 import Manage_Candidates from "@/screens/admin/manage_candidates/Manage_Candidates";
+
+import Timekeeping from "@/screens/admin/timekeeping/Timekeeping";
+import LeaseContract from "@/screens/apartment_manager/LeaseContract/LeaseContract";
+
+import CustomerList from "@/screens/apartment_manager/customers/list/CustomerList";
+import CustomerUpdate from "@/screens/apartment_manager/customers/update/CustomerUpdate";
+import Income from "../screens/apartment_manager/incomes/Income";
+import Expenses from "@/screens/apartment_manager/expenses/Expenses";
+import ReviewCustomer from "@/screens/operations_manager/review_customer/ReviewCustomer";
+import EditProfile from "@/screens/technical_staff/edit_profile/EditProfile";
+
 
 const drawerWidth = 240;
 
@@ -62,13 +74,30 @@ export default function MainRoute() {
 
         <Box
           component="main"
-          sx={{ flexGrow: 1, bgcolor: "background.default", p: 3 }}
+          sx={{ flexGrow: 1, bgcolor: "background.default", p: 3, overflow: "auto" }}
         >
           <Toolbar />
           <Routes>
-            <Route path="/manage_account" element={<Manage_Account />}></Route>
-            <Route path="/manage_candidates" element={<Manage_Candidates />}></Route>
+
             {/* Example path Router here */}
+
+            <Route path="/" element={<HomeScreen />}></Route>
+            <Route path="/admin" element={<Outlet />}>
+              <Route path="timekeeping" element={<Timekeeping />} />
+            </Route>
+            <Route path="/apartment-manager" element={<Outlet />}>
+              <Route path="lease-contract" element={<LeaseContract />} />
+              <Route path="customers" element={<CustomerList />} />
+              <Route path="customers/:id" element={<CustomerUpdate />} />
+              <Route path="incomes" element={<Income />} />
+              <Route path="expenses" element={<Expenses />} />
+            </Route>
+            <Route path="/operations" element={<Outlet />}>
+              <Route path="review-customers" element={<ReviewCustomer />} />
+            </Route>
+            <Route path="/technical-staff" element={<Outlet />}>
+              <Route path="edit-profile" element={<EditProfile />} />
+            </Route>
           </Routes>
         </Box>
       </Box>

@@ -45,11 +45,19 @@ const SiderComponent = () => {
     },
 
     {
+<<<<<<< HEAD
       key: "manageCadiden",
       label: "Manage Candidates",
       icon: <ManageAccountsIcon />,
       path: "/manage_candidates",
     }
+=======
+      key: "register-utilities",
+      label: "Register Utilities",
+      icon: <></>,
+      path: "/customer/register-utilities",
+    },
+>>>>>>> origin/DiepVanTy-2409
   ];
 
   return (

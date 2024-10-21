@@ -1,0 +1,28 @@
+.customer-list {
+
+    width: 100%;
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    &__search-area {
+        display: flex;
+        gap: 1em;
+        flex-wrap: wrap;
+    }
+
+    &__button-group {
+        display: flex;
+        gap: 1em;
+        justify-content: flex-end;
+        margin-top: 1em;
+    }
+
+    &__link {
+        display: block;
+        padding: 1em;
+    }
+}
