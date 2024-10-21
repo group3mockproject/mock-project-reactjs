@@ -28,7 +28,7 @@ const Manage_Candidates = () => {
             <DatePicker
               sx={{
                 "& .MuiInputBase-root": {
-                  height: "30px", // edit here 
+                  height: "30px", // Adjust height here
                   fontSize: "12px", // Adjust font size here
                 },
               }}
