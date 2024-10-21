@@ -11,6 +11,11 @@ import { ExpandLess, ExpandMore } from "@mui/icons-material";  // Icons for expa
 import { Link } from "react-router-dom";
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import DomainIcon from '@mui/icons-material/Domain';
+import PaymentsIcon from '@mui/icons-material/Payments';
+import BuildIcon from '@mui/icons-material/Build';
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+
 const SiderComponent = () => {
   const [open, setOpen] = useState(false);
 
@@ -43,21 +48,48 @@ const SiderComponent = () => {
         },
       ],
     },
-
     {
-<<<<<<< HEAD
       key: "manageCadiden",
       label: "Manage Candidates",
       icon: <ManageAccountsIcon />,
       path: "/manage_candidates",
-    }
-=======
+    },
+    {
       key: "register-utilities",
       label: "Register Utilities",
-      icon: <></>,
+      icon: <FitnessCenterIcon />,
       path: "/customer/register-utilities",
     },
->>>>>>> origin/DiepVanTy-2409
+    {
+      key: "manage_apartment",
+      label: "Manage Apartment",
+      icon: <DomainIcon />,
+      path: "/MangerApartment",
+    },
+    {
+      key: "customer_edit_profile",
+      label: "Customer Edit Profile",
+      icon: <ManageAccountsIcon />,
+      path: "/CustomerEditProfile",
+    },
+    {
+      key: "View_payment_history",
+      label: "View Payment History",
+      icon: <PaymentsIcon />,
+      path: "/ViewPaymentHistory",
+    },
+    {
+      key: "view_fines_list",
+      label: "View Fines List",
+      icon: <BuildIcon />,
+      path: "/ViewFinesList",
+    },
+    {
+      key: "register_utilities",
+      label: "Register Utilities",
+      icon: <FitnessCenterIcon />,
+      path: "/RegisterUtilities",
+    },
   ];
 
   return (

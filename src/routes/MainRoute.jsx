@@ -9,6 +9,13 @@ import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import HomeScreen from "../screens/HomeScreen";
 import SiderComponent from "@/components/SiderComponent";
 import HeaderComponent from "@/components/HeaderComponent";
+import MangerApartment from "@/screens/apartment_manager/manager_apartment/ManagerApartment.jsx";
+import CustomerEditProfile from "@/screens/customer/customer_edit_profile/CustomerEditProfile.jsx";
+import ViewPaymentHistory from "@/screens/customer/view_payment_history/ViewPaymentHistory.jsx";
+import ViewFinesList from "@/screens/customer/view_fines_list/ViewFinesList.jsx";
+import RegisterUtilities from "@/screens/customer/register_utilities/RegisterUtilities.jsx";
+import Card from "@/screens/customer/register_utilities/service_details/card/Card.jsx";
+import ServiceDetails from "@/screens/customer/register_utilities/service_details/ServiceDetails.jsx";
 
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
@@ -79,6 +86,14 @@ export default function MainRoute() {
           <Toolbar />
           <Routes>
 
+
+            <Route path="/" element={<HomeScreen />}></Route>
+              <Route path="/MangerApartment" element={<MangerApartment />}></Route>
+              <Route path="/CustomerEditProfile" element={<CustomerEditProfile />}></Route>
+              <Route path="/ViewPaymentHistory" element={<ViewPaymentHistory />}></Route>
+              <Route path="/ViewFinesList" element={<ViewFinesList />}></Route>
+              <Route path="/RegisterUtilities" element={<RegisterUtilities />}></Route>
+              <Route path="/ServiceDetails" element={<ServiceDetails />}></Route>
             {/* Example path Router here */}
 
             <Route path="/" element={<HomeScreen />}></Route>
