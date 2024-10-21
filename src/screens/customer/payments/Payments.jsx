@@ -97,7 +97,7 @@ export function Payments() {
     }
 
     const handleMovePayPage = () => {
-        navigate("/residents/payments/pay", {state: {chooseRequests: chooseRequests}});
+        navigate("/customers/payments/pay", {state: {chooseRequests: chooseRequests}});
     }
 
     return (
@@ -121,7 +121,7 @@ export function Payments() {
                                 <button>Year</button>
                             </div>
                             <LineChart
-                                width={400}
+                                width={window.innerWidth < 480 ? 300 :400}
                                 height={200}
                                 series={[{data: uData, area: true, showMark: false}]}
                                 xAxis={[{scaleType: 'point', data: xLabels, tickSize: 0 }]}

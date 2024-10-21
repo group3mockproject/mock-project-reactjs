@@ -11,6 +11,7 @@ import { ExpandLess, ExpandMore } from "@mui/icons-material";  // Icons for expa
 import { Link } from "react-router-dom";
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import LocalHotelIcon from '@mui/icons-material/LocalHotel';
+import ApartmentIcon from '@mui/icons-material/Apartment';
 
 const SiderComponent = () => {
   const [open, setOpen] = useState(false);
@@ -34,9 +35,55 @@ const SiderComponent = () => {
     },
     {
       key: "customer",
-      label: "Residents",
+      label: "Customers",
       icon: <LocalHotelIcon />,
-      path: "/customers",
+      children: [
+        {
+          key: "payments",
+          label: "Payment list & Pay fee",
+          path: "/customers/payments",
+        },
+        {
+          key: "rent-an-apartment",
+          label: "Rent an apartment",
+          path: "/customers/rent-apartment",
+        },
+      ]
+    },
+    {
+      key: "apartment-manager",
+      label: "Apartment Manager",
+      icon: <ApartmentIcon />,
+      children: [
+        {
+          key: "manage-fines",
+          label: "Manage Fines",
+          path: "/apartment-manager/fines",
+        },
+        {
+          key: "maintenance-schedule",
+          label: "Maintenance Schedules",
+          path: "/apartment-manager/maintenance-schedule",
+        },
+        {
+          key: "manage-events",
+          label: "Manage Events",
+          path: "/apartment-manager/manage-events",
+        },
+      ]
+    },
+    {
+      key: "landlord",
+      label: "Landlord",
+      icon: <ApartmentIcon />,
+      children: [
+        {
+          key: "manage-buildings",
+          label: "Manage Buildings",
+          path: "/landlord/manage-buildings",
+        },
+
+      ]
     },
     {
       key: "inventory",

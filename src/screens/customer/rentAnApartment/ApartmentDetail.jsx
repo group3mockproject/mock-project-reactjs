@@ -8,14 +8,25 @@ import {TiThermometer} from "react-icons/ti";
 import {TbParkingCircleFilled} from "react-icons/tb";
 import {IoWaterSharp} from "react-icons/io5";
 import {BsQuestionCircle} from "react-icons/bs";
+import {usePictures} from "@/core/contexts/ModalPicturesContext.jsx";
 
 export function ApartmentDetail() {
     const { id } = useParams();
     const [apartment, setApartment] = useState(null);
 
+    const {
+        changePictures,
+        toggleIsOpenModal,
+    } = usePictures();
+
     useEffect(() => {
         setApartment(apartmentList[id]);
     },[id])
+
+    const handleOpenPictureModal = () => {
+        changePictures(apartment.images);
+        toggleIsOpenModal(true);
+    }
 
     return (
         <div id='apartmentDetail' className={styles.apartmentDetail}>
@@ -24,11 +35,13 @@ export function ApartmentDetail() {
                     <div className={styles.apartmentInfo}>
                         <div className={styles.listImages}>
                             <div className={styles.mainImage}>
-                                <img src={apartment.images[0]} alt={`apartment${id}`}/>
+                                <img src={apartment.images[0]} alt={`apartment${id}`} onClick={handleOpenPictureModal}/>
                             </div>
                             <div className={styles.childImages}>
-                                <img className={styles.imgSecond} src={apartment.images[1]} alt={`apartment${id}`}/>
-                                <img className={styles.imgThird} src={apartment?.images[2]} alt={`apartment${id}`}/>
+                                <img className={styles.imgSecond} onClick={handleOpenPictureModal}
+                                     src={apartment.images[1]} alt={`apartment${id}`}/>
+                                <img className={styles.imgThird} onClick={handleOpenPictureModal}
+                                     src={apartment?.images[2]} alt={`apartment${id}`}/>
                                 <div className={styles.showMore}>
                                     <FaImages/> {apartment.images.length - 3}+
                                 </div>
@@ -124,7 +137,6 @@ export function ApartmentDetail() {
                     </div>
                 </>
             }
-
         </div>
     );
 }

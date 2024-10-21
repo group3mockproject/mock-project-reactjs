@@ -1,10 +1,11 @@
 import Router from "./routes/Router";
+import {ModalPicturesProvider} from "@/core/contexts/ModalPicturesContext.jsx";
 
 function App() {
   return (
-    <div>
+    <ModalPicturesProvider>
       <Router />
-    </div>
+    </ModalPicturesProvider>
   );
 }
 

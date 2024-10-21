@@ -485,3 +485,24 @@
   }
 }
 
+@media screen and (max-width: 480px){
+  .payments {
+    .maintenance {
+      .paymentHistory {
+
+        .historyBox {
+
+          .charts {
+            width: 100%;
+          }
+
+          .transaction {
+            width: 100%;
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
