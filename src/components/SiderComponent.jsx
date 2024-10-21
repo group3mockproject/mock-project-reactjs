@@ -9,7 +9,8 @@ import HomeIcon from "@mui/icons-material/Home";
 import AddToPhotosIcon from "@mui/icons-material/AddToPhotos";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";  // Icons for expand/collapse
 import { Link } from "react-router-dom";
-
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 const SiderComponent = () => {
   const [open, setOpen] = useState(false);
 
@@ -20,9 +21,9 @@ const SiderComponent = () => {
   const routes = [
     {
       key: "dashboard",
-      label: "Home",
-      icon: <HomeIcon />,
-      path: "/",
+      label: "Manage Account",
+      icon: <AccountBoxIcon />,
+      path: "/manage_account",
     },
     {
       key: "inventory",
@@ -42,6 +43,13 @@ const SiderComponent = () => {
         },
       ],
     },
+
+    {
+      key: "manageCadiden",
+      label: "Manage Candidates",
+      icon: <ManageAccountsIcon />,
+      path: "/manage_candidates",
+    }
   ];
 
   return (

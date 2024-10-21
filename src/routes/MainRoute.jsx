@@ -9,9 +9,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomeScreen from "../screens/HomeScreen";
 import SiderComponent from "@/components/SiderComponent";
 import HeaderComponent from "@/components/HeaderComponent";
-
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
+import Manage_Account from "@/screens/admin/manage_account/Manage_Account";
+import Manage_Candidates from "@/screens/admin/manage_candidates/Manage_Candidates";
 
 const drawerWidth = 240;
 
@@ -65,7 +66,8 @@ export default function MainRoute() {
         >
           <Toolbar />
           <Routes>
-            <Route path="/" element={<HomeScreen />}></Route>
+            <Route path="/manage_account" element={<Manage_Account />}></Route>
+            <Route path="/manage_candidates" element={<Manage_Candidates />}></Route>
             {/* Example path Router here */}
           </Routes>
         </Box>
