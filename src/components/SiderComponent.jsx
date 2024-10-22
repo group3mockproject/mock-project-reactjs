@@ -57,6 +57,30 @@ const SiderComponent = () => {
           label: "Rent an apartment",
           path: "/customers/rent-apartment",
         },
+        {
+          key: "customer_edit_profile",
+          label: "Customer Edit Profile",
+          icon: <ManageAccountsIcon />,
+          path: "/customers/CustomerEditProfile",
+        },
+        {
+          key: "View_payment_history",
+          label: "View Payment History",
+          icon: <PaymentsIcon />,
+          path: "/customers/ViewPaymentHistory",
+        },
+        {
+          key: "view_fines_list",
+          label: "View Fines List",
+          icon: <BuildIcon />,
+          path: "/customers/ViewFinesList",
+        },
+        {
+          key: "register_utilities",
+          label: "Register Utilities",
+          icon: <FitnessCenterIcon />,
+          path: "/customers/RegisterUtilities",
+        },
       ]
     },
     {
@@ -78,6 +102,12 @@ const SiderComponent = () => {
           key: "manage-events",
           label: "Manage Events",
           path: "/apartment-manager/manage-events",
+        },
+        {
+          key: "manage_apartment",
+          label: "Manage Apartment",
+          icon: <DomainIcon />,
+          path: "/apartment-manager/MangerApartment",
         },
       ]
     },
@@ -117,42 +147,6 @@ const SiderComponent = () => {
       label: "Manage Candidates",
       icon: <ManageAccountsIcon />,
       path: "/manage_candidates",
-    },
-    {
-      key: "register-utilities",
-      label: "Register Utilities",
-      icon: <FitnessCenterIcon />,
-      path: "/customer/register-utilities",
-    },
-    {
-      key: "manage_apartment",
-      label: "Manage Apartment",
-      icon: <DomainIcon />,
-      path: "/MangerApartment",
-    },
-    {
-      key: "customer_edit_profile",
-      label: "Customer Edit Profile",
-      icon: <ManageAccountsIcon />,
-      path: "/CustomerEditProfile",
-    },
-    {
-      key: "View_payment_history",
-      label: "View Payment History",
-      icon: <PaymentsIcon />,
-      path: "/ViewPaymentHistory",
-    },
-    {
-      key: "view_fines_list",
-      label: "View Fines List",
-      icon: <BuildIcon />,
-      path: "/ViewFinesList",
-    },
-    {
-      key: "register_utilities",
-      label: "Register Utilities",
-      icon: <FitnessCenterIcon />,
-      path: "/RegisterUtilities",
     },
   ];
 

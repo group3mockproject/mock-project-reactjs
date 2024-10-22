@@ -39,6 +39,12 @@ import { ManageEvent } from "@/screens/apartment_manager/manage_event/ManageEven
 import { ManageBuildings } from "@/screens/landlord/manage-buildings/ManageBuildings.jsx";
 import { BuildingEdit } from "@/screens/landlord/manage-buildings/BuildingEdit.jsx";
 import Timekeeping from "@/screens/admin/timekeeping/Timekeeping";
+import CustomerEditProfile from "@/screens/customer/customer_edit_profile/CustomerEditProfile.jsx";
+import ViewPaymentHistory from "@/screens/customer/view_payment_history/ViewPaymentHistory.jsx";
+import ViewFinesList from "@/screens/customer/view_fines_list/ViewFinesList.jsx";
+import RegisterUtilities from "@/screens/customer/register_utilities/RegisterUtilities.jsx";
+import ServiceDetails from "@/screens/customer/register_utilities/service_details/ServiceDetails.jsx";
+import ManagerApartment from "@/screens/apartment_manager/manager_apartment/ManagerApartment.jsx";
 
 const drawerWidth = 240;
 
@@ -120,10 +126,16 @@ export default function MainRoute() {
           <Route path="/customers/payments" element={<Payments />} />
           <Route path="/customers/rent-apartment" element={<ApartmentList />} />
           <Route path="/customers/rent-apartment/:id" element={<ApartmentDetail />} />
+          <Route path="/customers/CustomerEditProfile" element={<CustomerEditProfile />} />
+          <Route path="/customers/ViewPaymentHistory" element={<ViewPaymentHistory />} />
+          <Route path="/customers/ViewFinesList" element={<ViewFinesList />} />
+          <Route path="/customers/RegisterUtilities" element={<RegisterUtilities />} />
+          <Route path="/customers/RegisterUtilities/ServiceDetails" element={<ServiceDetails />} />
           <Route path="/apartment-manager/fines" element={<FinesList />} />
           <Route path="/apartment-manager/fines/create" element={<FinesCreate />} />
           <Route path="/apartment-manager/maintenance-schedule" element={<MaintenanceSchedule />} />
           <Route path="/apartment-manager/manage-events" element={<ManageEvent />} />
+          <Route path="/apartment-manager/MangerApartment" element={<ManagerApartment />} />
           <Route path="/landlord/manage-buildings" element={<ManageBuildings />} />
           <Route path="/landlord/manage-buildings/create" element={<BuildingEdit />} />
           <Route path="/landlord/manage-buildings/:id/edit" element={<BuildingEdit />} />

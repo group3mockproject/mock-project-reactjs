@@ -59,7 +59,6 @@ const ManagerApartment = () => {
                             value={newItem.aptId}
                             onChange={handleChange}
                         />
-                        {/* Thay thế input bằng select cho trạng thái */}
                         <select
                             name="status"
                             value={newItem.status}

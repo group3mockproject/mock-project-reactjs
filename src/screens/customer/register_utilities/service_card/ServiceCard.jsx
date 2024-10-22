@@ -12,7 +12,7 @@ const ServiceCard = ({ title, price, description, color, status }) => {
             <p className="description">{description}</p>
 
             <div className="footer">
-                <a href="/ServiceDetails" className="more">More...</a>
+                <a href="/customers/RegisterUtilities/ServiceDetails" className="more">More...</a>
                 {status !== "1" && (
                     <button className={`subscribe-btn ${color}`}>Subscribe</button>
                 )}

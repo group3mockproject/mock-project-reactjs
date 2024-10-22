@@ -10,11 +10,11 @@ const Card = ({ title, price, description }) => {
     const navigate = useNavigate();
 
     const handleBack = () => {
-        navigate("/RegisterUtilities");
+        navigate("/customers/RegisterUtilities");
     };
 
     const handleSubscribe = () => {
-        navigate("/CustomerEditProfile");
+        navigate("/customers/CustomerEditProfile");
     };
 
     return (
