@@ -39,6 +39,7 @@ import { ManageEvent } from "@/screens/apartment_manager/manage_event/ManageEven
 import { ManageBuildings } from "@/screens/landlord/manage-buildings/ManageBuildings.jsx";
 import { BuildingEdit } from "@/screens/landlord/manage-buildings/BuildingEdit.jsx";
 import Timekeeping from "@/screens/admin/timekeeping/Timekeeping";
+import Manage_Account from "@/screens/admin/manage_account/Manage_Account";
 
 const drawerWidth = 240;
 
@@ -96,6 +97,7 @@ export default function MainRoute() {
         <Toolbar />
         <Routes>
           <Route path="/" element={<HomeScreen />} />
+         <Route path="/manage_account" element={<Manage_Account/>}/>
           <Route path="/apartment-manager" element={<Outlet />}>
             <Route path="lease-contract" element={<LeaseContract />} />
             <Route path="customers" element={<CustomerList />} />
