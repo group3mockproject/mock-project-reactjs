@@ -20,6 +20,9 @@ import EditProfileOperationManager from "@/screens/operations_manager/edit_profi
 import ReviewEquipment from "@/screens/operations_manager/review_equipment/ReviewEquipment";
 import DetailReviewEquipment from "@/screens/operations_manager/review_equipment/DetailReviewEquipment";
 import ServiceContract from "@/screens/apartment_manager/service_contract/ServiceContract";
+import ReviewAllContracts from "@/screens/operations_manager/review_all_contracts/ReviewAllContracts";
+import ViewReport from "@/screens/operations_manager/view_report/ViewReport";
+import DetailViewReport from "@/screens/operations_manager/view_report/DetailViewReport";
 
 const drawerWidth = 240;
 
@@ -96,11 +99,17 @@ export default function MainRoute() {
                 path="edit-profile"
                 element={<EditProfileOperationManager />}
               />
+              <Route
+                path="review-all-contracts"
+                element={<ReviewAllContracts />}
+              />
               <Route path="review-equipment" element={<ReviewEquipment />} />
               <Route
                 path="review-equipment/:id"
                 element={<DetailReviewEquipment />}
               />
+              <Route path="reports" element={<ViewReport />} />
+              <Route path="reports/:id" element={<DetailViewReport />} />
             </Route>
 
             {/* Example path Router here */}
