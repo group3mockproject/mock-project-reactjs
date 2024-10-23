@@ -1,28 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Button, TextField, Modal, Typography } from "@mui/material";
+import axios from "axios"; // Sử dụng axios để gọi API
 import "./MyComplaints.scss";
-
-const complaintData = [
-  {
-    complaint_id: 1,
-    resident_id: 1,
-    employee_id: 1,
-    complaint_type: "Noise Complaint",
-    description: "Loud music from the apartment above.",
-    resolved_at: null,
-    status: "Pending",
-  },
-  {
-    complaint_id: 2,
-    resident_id: 2,
-    employee_id: 2,
-    complaint_type: "Maintenance Issue",
-    description: "Leaking faucet in the kitchen.",
-    resolved_at: null,
-    status: "Pending",
-  },
-];
 
 const paginationModel = { page: 0, pageSize: 5 };
 
@@ -31,6 +11,8 @@ const MyComplaints = () => {
   const [selectedComplaint, setSelectedComplaint] = useState(null);
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const columns = [
     { field: "complaint_id", headerName: "Complaint ID", width: 150 },
@@ -46,7 +28,7 @@ const MyComplaints = () => {
         <Button
           variant="outlined"
           size="small"
-          onClick={() => handleViewComplaint(row)}
+          onClick={() => handleViewComplaint(row.complaint_id)}
         >
           View
         </Button>
@@ -54,17 +36,39 @@ const MyComplaints = () => {
     },
   ];
 
+  // Fetch complaint data from API when component mounts
   useEffect(() => {
-    const _data = complaintData.map((complaint) => ({
-      ...complaint,
-      id: complaint.complaint_id,
-    }));
-    setData(_data);
+    const fetchComplaints = async () => {
+      try {
+        setIsLoading(true);
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_CUSTOMER_COMPLAINTS}`
+        );
+        const complaints = response.data.map((complaint) => ({
+          ...complaint,
+          id: complaint.complaint_id, // Ensure DataGrid works with an 'id' field
+        }));
+        setData(complaints);
+      } catch (e) {
+        setError(e);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchComplaints();
   }, []);
 
-  const handleViewComplaint = (complaint) => {
-    setSelectedComplaint(complaint);
-    setIsViewModalOpen(true);
+  const handleViewComplaint = async (complaint_id) => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_CUSTOMER_COMPLAINTS}/${complaint_id}`
+      );
+      setSelectedComplaint(response.data);
+      setIsViewModalOpen(true);
+    } catch (e) {
+      setError(e);
+    }
   };
 
   const handleCreateComplaint = () => {
@@ -76,6 +80,9 @@ const MyComplaints = () => {
     setIsCreateModalOpen(false);
     setSelectedComplaint(null);
   };
+
+  if (isLoading) return <p>Loading complaints...</p>;
+  if (error) return <p>Error loading complaints: {error.message}</p>;
 
   return (
     <div className="my-complaint">
@@ -158,6 +165,8 @@ const CreateComplaintModal = ({ isOpen, onClose }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Creating complaint:", formData);
+    // Call API to create complaint
+    // axios.post(`${import.meta.env.VITE_API_CUSTOMER_COMPLAINTS}`, formData)
     onClose();
   };
 

@@ -1,47 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Button, TextField, Modal, Typography } from "@mui/material";
+import useFetch from "@/hooks/useFetch"; // Sử dụng hook useFetch
+import axios from "axios"; // Thêm axios cho việc gọi chi tiết hợp đồng
 import "./ViewContracts.scss";
 
-const contractData = [
-  {
-    lease_id: 1,
-    resident_id: 1,
-    apartment_id: 1,
-    start_date: "2024-01-01",
-    end_date: "2025-01-01",
-    rent_amount: 1500.0,
-    deposit_amount: 1500.0,
-    status: "Active",
-  },
-  {
-    lease_id: 2,
-    resident_id: 2,
-    apartment_id: 2,
-    start_date: "2024-01-01",
-    end_date: "2025-01-01",
-    rent_amount: 1500.0,
-    deposit_amount: 1500.0,
-    status: "Active",
-  },
-  {
-    lease_id: 3,
-    resident_id: 3,
-    apartment_id: 3,
-    start_date: "2024-01-01",
-    end_date: "2025-01-01",
-    rent_amount: 1500.0,
-    deposit_amount: 1500.0,
-    status: "Active",
-  },
-];
-
-const paginationModel = { page: 0, pageSize: 5 };
-
-const ViewContracts = () => {
-  const [data, setData] = useState([]);
+// Giả định user_id được truyền từ props hoặc lấy từ auth context
+const ViewContracts = ({ user_id = 1 }) => {
+  const {
+    data: contracts,
+    isLoading,
+    error,
+    setData: setContracts,
+  } = useFetch({
+    url: `${import.meta.env.VITE_API_CUSTOMER_CONTRACTS}`,
+  });
+  const [filteredData, setFilteredData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [selectedContract, setSelectedContract] = useState(null);
+  const [contractDetail, setContractDetail] = useState(null); // Để chứa chi tiết hợp đồng
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDetailLoading, setIsDetailLoading] = useState(false);
+  const [detailError, setDetailError] = useState(null);
 
   const columns = [
     { field: "lease_id", headerName: "ID", width: 120 },
@@ -60,7 +40,7 @@ const ViewContracts = () => {
         <Button
           variant="outlined"
           size="small"
-          onClick={() => handleViewContract(row)}
+          onClick={() => handleViewContract(row.lease_id)}
         >
           View
         </Button>
@@ -68,40 +48,82 @@ const ViewContracts = () => {
     },
   ];
 
+  // Gán dữ liệu ban đầu sau khi load từ useFetch
   useEffect(() => {
-    const _data = contractData.map((contract) => ({
-      ...contract,
-      id: contract.lease_id,
-    }));
-    setData(_data);
-  }, []);
+    if (contracts) {
+      const _data = contracts.map((contract) => ({
+        ...contract,
+        id: contract.lease_id,
+      }));
+      setFilteredData(_data);
+    }
+  }, [contracts]);
 
-  const handleViewContract = (contract) => {
-    setSelectedContract(contract);
+  // Xử lý tìm kiếm
+  const handleSearch = () => {
+    const searchResults = contracts.filter(
+      (contract) =>
+        contract.lease_id.toString().includes(searchTerm) ||
+        contract.resident_id.toString().includes(searchTerm) ||
+        contract.apartment_id.toString().includes(searchTerm)
+    );
+    setFilteredData(searchResults);
+  };
+
+  const handleViewContract = async (lease_id) => {
+    setSelectedContract(lease_id);
     setIsModalOpen(true);
+    setIsDetailLoading(true);
+    console.log(lease_id);
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_CUSTOMER_CONTRACTS}/${lease_id}`
+      );
+      setContractDetail(response.data);
+    } catch (e) {
+      setDetailError(e);
+    } finally {
+      setIsDetailLoading(false);
+    }
   };
 
   const handleCloseModal = () => {
     setSelectedContract(null);
+    setContractDetail(null);
     setIsModalOpen(false);
   };
+
+  if (isLoading) return <p>Loading contracts...</p>;
+  if (error) return <p>Error loading contracts: {error.message}</p>;
 
   return (
     <div className="view-contracts">
       <h1>My Contracts</h1>
 
       <div className="view-contracts__actions">
-        <form className="view-contracts__search-area">
-          <TextField label="Search..." size="small" />
-          <Button variant="contained">Search</Button>
+        <form
+          className="view-contracts__search-area"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSearch();
+          }}
+        >
+          <TextField
+            label="Search..."
+            size="small"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <Button variant="contained" onClick={handleSearch}>
+            Search
+          </Button>
         </form>
       </div>
 
       <div className="view-contracts__table">
         <DataGrid
-          rows={data}
+          rows={filteredData}
           columns={columns}
-          initialState={{ pagination: { paginationModel } }}
           pageSizeOptions={[5, 10]}
           sx={{ border: 0 }}
         />
@@ -110,17 +132,29 @@ const ViewContracts = () => {
       <ContractDetailModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
-        contract={selectedContract}
+        contract={contractDetail}
+        isLoading={isDetailLoading}
+        error={detailError}
       />
     </div>
   );
 };
 
-const ContractDetailModal = ({ isOpen, onClose, contract }) => (
+const ContractDetailModal = ({
+  isOpen,
+  onClose,
+  contract,
+  isLoading,
+  error,
+}) => (
   <Modal open={isOpen} onClose={onClose} className="contract-modal">
     <div className="contract-modal__content">
       <Typography variant="h5">Contract Detail</Typography>
-      {contract ? (
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>Error loading contract details: {error.message}</p>
+      ) : contract ? (
         <div>
           <p>
             <strong>ID:</strong> {contract.lease_id}
