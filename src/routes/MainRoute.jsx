@@ -116,17 +116,24 @@ export default function MainRoute() {
           <Route path="/admin" element={<Outlet />}>
             <Route path="timekeeping" element={<Timekeeping />} />
           </Route>
-          <Route path="/customers/payments/pay" element={<ConfirmPay />} />
-          <Route path="/customers/payments" element={<Payments />} />
-          <Route path="/customers/rent-apartment" element={<ApartmentList />} />
-          <Route path="/customers/rent-apartment/:id" element={<ApartmentDetail />} />
-          <Route path="/apartment-manager/fines" element={<FinesList />} />
-          <Route path="/apartment-manager/fines/create" element={<FinesCreate />} />
-          <Route path="/apartment-manager/maintenance-schedule" element={<MaintenanceSchedule />} />
-          <Route path="/apartment-manager/manage-events" element={<ManageEvent />} />
-          <Route path="/landlord/manage-buildings" element={<ManageBuildings />} />
-          <Route path="/landlord/manage-buildings/create" element={<BuildingEdit />} />
-          <Route path="/landlord/manage-buildings/:id/edit" element={<BuildingEdit />} />
+            <Route path="/customers" element={<Outlet />}>
+                <Route path="payments/pay" element={<ConfirmPay />} />
+                <Route path="payments" element={<Payments />} />
+                <Route path="rent-apartment" element={<ApartmentList />} />
+                <Route path="rent-apartment/:id" element={<ApartmentDetail />} />
+            </Route>
+            <Route path="/apartment-manager" element={<Outlet />}>
+                <Route path="fines" element={<FinesList />} />
+                <Route path="fines/create" element={<FinesCreate />} />
+                <Route path="maintenance-schedule" element={<MaintenanceSchedule />} />
+                <Route path="manage-events" element={<ManageEvent />} />
+            </Route>
+
+            <Route path="/landlord" element={<Outlet />}>
+                <Route path="manage-buildings" element={<ManageBuildings />} />
+                <Route path="manage-buildings/create" element={<BuildingEdit />} />
+                <Route path="manage-buildings/:id/edit" element={<BuildingEdit />} />
+            </Route>
         </Routes>
       </Box>
     </Box>

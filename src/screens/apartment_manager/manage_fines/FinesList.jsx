@@ -2,6 +2,7 @@ import styles from "./FinesList.module.scss";
 import {IoTrashSharp} from "react-icons/io5";
 import {useState} from "react";
 import {Link} from "react-router-dom";
+import {IoIosArrowBack, IoIosArrowForward} from "react-icons/io";
 
 const finesList = [
     {
@@ -112,13 +113,19 @@ export function FinesList() {
                     <div className={styles.page}>
                         <div className={styles.pageBox}>
                             {pageNumber !== 0 &&
-                                <a className={styles.pageA} onClick={() => handlePage(pageNumber - 1)}>Prev Page</a>
+                                <a className={styles.pageA}
+                                   onClick={() => handlePage(pageNumber - 1)}>
+                                    {window.innerWidth < 567 ? <IoIosArrowBack /> : "Prev Page"}
+                                </a>
                             }
                             <span>
                                     {showPageNo()}
                                 </span>
                             {pageNumber < (totalPages - 1) &&
-                                <a className={styles.pageA} onClick={() => handlePage(pageNumber + 1)}>Next Page</a>
+                                <a className={styles.pageA}
+                                   onClick={() => handlePage(pageNumber + 1)}>
+                                    {window.innerWidth < 567 ? <IoIosArrowForward /> : "Next Page"}
+                                </a>
                             }
                         </div>
                     </div>

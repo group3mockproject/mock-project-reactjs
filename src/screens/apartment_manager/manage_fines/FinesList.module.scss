@@ -37,12 +37,11 @@
 
     .finesTableContainer {
       width: 100%;
-      overflow-x: auto;
+      //overflow-x: auto;
       display: flex;
 
       table.finesList {
         width: 100%;
-        min-width: 1200px;
         position: relative;
         padding: 10px;
         border-collapse: collapse;
@@ -90,6 +89,8 @@
 
     .page {
       margin: 40px auto;
+      width: 100%;
+      line-height: 2.5;
       display: flex;
       justify-content: right;
       align-items: center;
@@ -109,6 +110,16 @@
           color: white;
         }
       }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .finesTableContainer {
+    overflow-x: auto;
+    table.finesList {
+      width: 100%;
+      min-width: 768px;
     }
   }
 }

@@ -1,5 +1,4 @@
 import styles from "./BuildingEdit.module.scss";
-import {UploadImages} from "@/components/upload_images/UploadImages.jsx";
 import spinner from "@/assets/gifs/Spinner.gif";
 import {useFieldArray, useForm} from "react-hook-form";
 import {useEffect, useState} from "react";
