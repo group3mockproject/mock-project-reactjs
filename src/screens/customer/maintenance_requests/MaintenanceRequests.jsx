@@ -1,40 +1,17 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { DataGrid } from "@mui/x-data-grid";
-import { Button, TextField, Modal, Typography } from "@mui/material";
+import {
+  Button,
+  TextField,
+  Modal,
+  Typography,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+} from "@mui/material";
 import "./MaintenanceRequests.scss";
-
-const requestData = [
-  {
-    request_id: 1,
-    resident_id: 1,
-    employee_id: 2,
-    request_date: "2024-01-05",
-    priority: "High",
-    description: "Leaking faucet in kitchen",
-    status: "Pending",
-    delflag: 0,
-  },
-  {
-    request_id: 2,
-    resident_id: 1,
-    employee_id: 3,
-    request_date: "2024-01-06",
-    priority: "Medium",
-    description: "Heating issue in living room",
-    status: "In Progress",
-    delflag: 0,
-  },
-  {
-    request_id: 3,
-    resident_id: 1,
-    employee_id: 4,
-    request_date: "2024-01-07",
-    priority: "Low",
-    description: "Light bulb replacement",
-    status: "Completed",
-    delflag: 0,
-  },
-];
 
 const paginationModel = { page: 0, pageSize: 5 };
 
@@ -46,10 +23,9 @@ const MaintenanceRequests = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
   const columns = [
-    { field: "request_id", headerName: "Request ID", width: 120 },
+    { field: "requestId", headerName: "Request ID", width: 120 },
     { field: "description", headerName: "Description", width: 300 },
-    { field: "request_date", headerName: "Request Date", width: 150 },
-    { field: "priority", headerName: "Priority", width: 120 },
+    { field: "requestDate", headerName: "Request Date", width: 150 },
     { field: "status", headerName: "Status", width: 150 },
     {
       field: "actions",
@@ -68,12 +44,29 @@ const MaintenanceRequests = () => {
     },
   ];
 
+  const fetchRequests = async () => {
+    try {
+      const token = JSON.parse(localStorage.getItem("token"));
+      const response = await axios.get(
+        "http://localhost:9090/api/v1/maintenance/requests",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const data = response.data.map((request) => ({
+        ...request,
+        id: request.requestId, // required for DataGrid
+      }));
+      setRequests(data);
+    } catch (error) {
+      console.error("Error fetching requests:", error);
+    }
+  };
+
   useEffect(() => {
-    const _data = requestData.map((request) => ({
-      ...request,
-      id: request.request_id,
-    }));
-    setRequests(_data);
+    fetchRequests();
   }, []);
 
   const handleViewRequest = (request) => {
@@ -129,6 +122,7 @@ const MaintenanceRequests = () => {
       <CreateRequestModal
         isOpen={isCreateModalOpen}
         onClose={handleCloseModal}
+        refreshRequests={fetchRequests}
       />
     </div>
   );
@@ -141,16 +135,13 @@ const RequestDetailModal = ({ isOpen, onClose, request }) => (
       {request ? (
         <div>
           <p>
-            <strong>ID:</strong> {request.request_id}
+            <strong>ID:</strong> {request.requestId}
           </p>
           <p>
             <strong>Description:</strong> {request.description}
           </p>
           <p>
-            <strong>Date:</strong> {request.request_date}
-          </p>
-          <p>
-            <strong>Priority:</strong> {request.priority}
+            <strong>Date:</strong> {request.requestDate}
           </p>
           <p>
             <strong>Status:</strong> {request.status}
@@ -166,11 +157,14 @@ const RequestDetailModal = ({ isOpen, onClose, request }) => (
   </Modal>
 );
 
-const CreateRequestModal = ({ isOpen, onClose }) => {
+const CreateRequestModal = ({ isOpen, onClose, refreshRequests }) => {
   const [formData, setFormData] = useState({
     description: "",
-    priority: "Low",
-    request_date: new Date().toISOString().split("T")[0],
+    status: "Pending",
+    requestDate: new Date().toISOString().split("T")[0],
+    residentId: JSON.parse(localStorage.getItem("userId")) || 1,
+    employeeId: 202,
+    delFlag: false,
   });
 
   const handleChange = (e) => {
@@ -178,10 +172,27 @@ const CreateRequestModal = ({ isOpen, onClose }) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Creating request:", formData);
-    onClose();
+    console.log("Data to be sent:", formData);
+    try {
+      const token = JSON.parse(localStorage.getItem("token"));
+      await axios.post(
+        "http://localhost:9090/api/v1/maintenance/requests",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("Request created successfully");
+      refreshRequests(); // Tải lại danh sách yêu cầu
+      onClose(); // Đóng modal
+    } catch (error) {
+      console.error("Error creating request:", error);
+    }
   };
 
   return (
@@ -197,30 +208,8 @@ const CreateRequestModal = ({ isOpen, onClose }) => {
             fullWidth
             margin="normal"
           />
-          <TextField
-            label="Priority"
-            name="priority"
-            value={formData.priority}
-            onChange={handleChange}
-            fullWidth
-            margin="normal"
-          />
-          <TextField
-            label="Request Date"
-            name="request_date"
-            type="date"
-            value={formData.request_date}
-            onChange={handleChange}
-            fullWidth
-            margin="normal"
-          />
-          <Button
-            type="submit"
-            variant="contained"
-            sx={{
-              marginTop: "16px",
-            }}
-          >
+
+          <Button type="submit" variant="contained" sx={{ marginTop: "16px" }}>
             Submit
           </Button>
         </form>

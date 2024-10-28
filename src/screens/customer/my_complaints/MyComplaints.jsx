@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Button, TextField, Modal, Typography } from "@mui/material";
-import axios from "axios"; // Sử dụng axios để gọi API
+import axios from "axios";
 import "./MyComplaints.scss";
 
 const paginationModel = { page: 0, pageSize: 5 };
@@ -42,11 +42,12 @@ const MyComplaints = () => {
       try {
         setIsLoading(true);
         const response = await axios.get(
-          `${import.meta.env.VITE_API_CUSTOMER_COMPLAINTS}`
+          "http://localhost:9090/api/v1/complaint"
+          // "https://6719134e7fc4c5ff8f4c5691.mockapi.io/api/v1/customer/complaints"
         );
         const complaints = response.data.map((complaint) => ({
           ...complaint,
-          id: complaint.complaint_id, // Ensure DataGrid works with an 'id' field
+          id: complaint.complaint_id,
         }));
         setData(complaints);
       } catch (e) {
@@ -62,7 +63,7 @@ const MyComplaints = () => {
   const handleViewComplaint = async (complaint_id) => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_CUSTOMER_COMPLAINTS}/${complaint_id}`
+        `${"http://localhost:9090/api/v1/complaint"}/${complaint_id}`
       );
       setSelectedComplaint(response.data);
       setIsViewModalOpen(true);
@@ -117,6 +118,7 @@ const MyComplaints = () => {
       <CreateComplaintModal
         isOpen={isCreateModalOpen}
         onClose={handleCloseModal}
+        refreshComplaints={() => fetchComplaints()}
       />
     </div>
   );
@@ -151,10 +153,14 @@ const ComplaintModal = ({ isOpen, onClose, complaint }) => (
   </Modal>
 );
 
-const CreateComplaintModal = ({ isOpen, onClose }) => {
+const CreateComplaintModal = ({ isOpen, onClose, refreshComplaints }) => {
   const [formData, setFormData] = useState({
+    residentId: JSON.parse(localStorage.getItem("userId")) || 1,
     complaint_type: "",
+    employeeId: 1,
     description: "",
+    status: "Pending",
+    createdAt: new Date().toISOString(),
   });
 
   const handleChange = (e) => {
@@ -162,12 +168,20 @@ const CreateComplaintModal = ({ isOpen, onClose }) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Creating complaint:", formData);
-    // Call API to create complaint
-    // axios.post(`${import.meta.env.VITE_API_CUSTOMER_COMPLAINTS}`, formData)
-    onClose();
+    try {
+      await axios.post("http://localhost:9090/api/v1/complaint", {
+        ...formData,
+        employeeId: 202,
+      });
+      console.log("Complaint created successfully");
+      refreshComplaints();
+      onClose();
+    } catch (error) {
+      console.error("Error creating complaint:", error);
+    }
   };
 
   return (
